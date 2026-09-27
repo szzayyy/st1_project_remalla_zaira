@@ -39,7 +39,7 @@
   }
   a{ color: inherit; }
   .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px 80px; position: relative; }
-
+ 
   /* quiet corner decorations, no motion — matches reference */
   .corner-deco{ position: fixed; pointer-events: none; z-index: 0; opacity: .75; }
   .corner-deco svg{ width: 100%; height: 100%; display:block; }
@@ -48,7 +48,7 @@
   .corner-deco.ribbon-bl{ top: 60%; left: 5%; width: 40px; height: 28px; }
   .corner-deco.bfly{ top: 40%; right: 6%; width: 42px; height: 32px; }
   @media (max-width: 780px){ .corner-deco{ display:none; } }
-
+ 
   header.hero{ position:relative; padding: 56px 0 28px; text-align:center; z-index:1; }
   .eyebrow{
     font-family:'Quicksand'; font-weight:700; font-size:.72rem; letter-spacing:.16em;
@@ -80,7 +80,7 @@
   .page-title{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.6rem; color: var(--pink-deepest); margin: 8px 0 18px; text-align:center; }
   .about-content{ white-space: pre-wrap; line-height:1.7; font-weight:600; color: var(--mauve); margin: 0 auto 18px; font-size:.96rem; max-width:640px; text-align:left; }
   .page-section form .field{ text-align:left; }
-
+ 
   .chips{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin: 8px 0 34px; position:relative; z-index:1; }
   .chip{
     font-family:'Quicksand'; font-weight:700; font-size:.86rem; padding: 9px 18px; border-radius: 999px;
@@ -89,12 +89,12 @@
   }
   .chip:hover{ transform: translateY(-1px); }
   .chip.active{ background: var(--pink); border-color: var(--pink); color: #fff; }
-
+ 
   .grid{
     display:grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 30px 22px;
     position:relative; z-index:1;
   }
-
+ 
   .card{
     background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 14px 16px;
     box-shadow: 0 10px 24px -16px var(--shadow);
@@ -114,11 +114,11 @@
     display:flex; align-items:center; gap:4px; box-shadow: 0 2px 6px var(--shadow);
   }
   .cat-tag svg{ width:12px; height:12px; }
-
+ 
   .card h3{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.08rem; margin: 12px 2px 2px; color: var(--mauve); }
   .card .meta{ margin: 0 2px 12px; font-size:.82rem; color: var(--mauve-soft); font-weight:600; }
   .card .desc{ margin: -6px 2px 12px; font-size:.82rem; color: var(--mauve-soft); line-height:1.45; }
-
+ 
   .card-actions{ display:flex; align-items:center; gap:8px; padding: 0 2px; }
   .verify-btn{
     flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
@@ -133,14 +133,14 @@
   }
   .icon-btn:hover{ border-color: var(--pink); color: var(--pink-deep); }
   .icon-btn svg{ width:15px; height:15px; }
-
+ 
   .empty{
     text-align:center; padding: 60px 20px; position:relative; z-index:1;
   }
   .empty svg{ width:80px; height:80px; margin-bottom:14px; }
   .empty h3{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.3rem; margin:0 0 8px; }
   .empty p{ color: var(--mauve-soft); font-weight:600; max-width:38ch; margin: 0 auto 18px; line-height:1.5; }
-
+ 
   .fab{
     position:fixed; right: max(22px, env(safe-area-inset-right,0px)); bottom: max(22px, env(safe-area-inset-bottom,0px));
     width:58px; height:58px; border-radius:50%; background: var(--pink-deep); color:#fff; border:none;
@@ -154,7 +154,7 @@
     padding: 12px 20px; border-radius:999px; font-family:'Quicksand'; font-weight:700; cursor:pointer; font-size:.92rem;
   }
   .fab-add-first:hover{ background: var(--pink); }
-
+ 
   .overlay{
     position:fixed; inset:0; background: rgba(60,30,45,.38); backdrop-filter: blur(2px);
     display:flex; align-items:flex-end; justify-content:center; z-index: 40; opacity:0; pointer-events:none;
@@ -195,7 +195,7 @@
   .btn.ghost{ background: transparent; color: var(--mauve-soft); border: 1.5px solid var(--line); }
   .btn.ghost:hover{ border-color: var(--pink); color: var(--pink-deep); }
   .btn.danger{ background: transparent; color:#C4587A; border: 1.5px solid #EFC7D3; }
-
+ 
   .toast{
     position:fixed; left:50%; bottom: max(24px, env(safe-area-inset-bottom,0px)); transform: translate(-50%, 20px);
     background: var(--mauve); color: var(--paper); padding: 12px 20px; border-radius: 999px; font-weight:700;
@@ -203,13 +203,13 @@
     max-width: 90vw; text-align:center;
   }
   .toast.show{ opacity:1; transform: translate(-50%, 0); }
-
+ 
   footer{ text-align:center; padding: 30px 0 10px; color: var(--mauve-soft); font-size:.78rem; font-weight:600; position:relative; z-index:1; }
   .owner-badge{
     display:inline-flex; align-items:center; gap:6px; background: var(--pink-soft); color: var(--pink-deepest);
     font-size:.72rem; font-weight:700; padding: 5px 12px; border-radius:999px; margin-bottom: 14px;
   }
-
+ 
   /* top navigation */
   .top-nav{
     position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
@@ -236,10 +236,35 @@
   .nav-link:hover{ color: var(--pink-deep); }
   .nav-link.active{ background: var(--pink); border-color: var(--pink); color:#fff; }
   @media (max-width: 560px){
-    .top-nav-brand{ display:none; }
-    .top-nav-inner{ justify-content:center; }
+    .top-nav-inner{ justify-content:space-between; }
   }
-
+ 
+  /* brand dropdown menu */
+  .brand-wrap{ position: relative; flex-shrink: 0; }
+  .top-nav-brand{ cursor: pointer; user-select: none; }
+  .top-nav-brand:hover{ color: var(--pink-deep); }
+  .brand-menu{
+    position: absolute; top: calc(100% + 10px); left: 0; min-width: 230px;
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(90,40,60,.14); padding: 6px; z-index: 40;
+    display: none; flex-direction: column; gap: 2px;
+  }
+  .brand-menu.open{ display: flex; }
+  .brand-menu-item{
+    display:flex; align-items:center; gap: 9px; width:100%; text-align:left;
+    font-family:'Quicksand'; font-weight:600; font-size:.85rem; color: var(--mauve-soft, #7a5566);
+    background: transparent; border: none; padding: 10px 12px; border-radius: 9px; cursor:pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .brand-menu-item:hover{ background: var(--pink-soft); color: var(--pink-deepest); }
+  .brand-menu-item svg{ flex-shrink:0; }
+  .brand-menu-caret{
+    width:9px; height:9px; margin-left:3px; display:inline-block; vertical-align: middle;
+    opacity: .35; transition: transform .15s ease, opacity .15s ease;
+  }
+  .top-nav-brand:hover .brand-menu-caret{ opacity: .6; }
+  .top-nav-brand.menu-open .brand-menu-caret{ transform: rotate(180deg); }
+ 
   /* profile photo uploader */
   .avatar-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; margin: 4px 0 22px; }
   .avatar-circle{
@@ -254,10 +279,29 @@
 </style>
 </head>
 <body>
-
+ 
 <nav class="top-nav" id="topNav">
   <div class="top-nav-inner">
-    <span class="top-nav-brand" id="navBrand">Seminars And Tours</span>
+    <div class="brand-wrap" id="brandWrap">
+      <span class="top-nav-brand" id="navBrand" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+        Seminars And Tours
+        <svg class="brand-menu-caret" id="brandCaret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 9 6 6 6-6"/></svg>
+      </span>
+      <div class="brand-menu" id="brandMenu" role="menu">
+        <button class="brand-menu-item" id="editMetaBtn" role="menuitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+          Edit title &amp; intro
+        </button>
+        <button class="brand-menu-item" id="downloadBtn" role="menuitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+          Download updated page
+        </button>
+        <button class="brand-menu-item" id="menuAddItem" role="menuitem">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+          Add certificate / credential
+        </button>
+      </div>
+    </div>
     <div class="nav-links" id="pageNav">
       <button class="nav-link active" data-page="gallery">Certificates &amp; Badges</button>
       <button class="nav-link" data-page="aboutme">About Me</button>
@@ -265,7 +309,7 @@
     </div>
   </div>
 </nav>
-
+ 
 <div class="corner-deco flower">
   <svg viewBox="0 0 48 48" fill="none" stroke="var(--pink)" stroke-width="1.4">
     <path d="M24 24C20 18 20 10 24 6c4 4 4 12 0 18Z"></path>
@@ -299,9 +343,9 @@
     <line x1="32" y1="11" x2="32" y2="37" stroke="var(--mauve-soft)" stroke-width="1.3" stroke-linecap="round"></line>
   </svg>
 </div>
-
+ 
 <script id="site-data" type="application/json">{"title":"Seminars And Tours","subtitle":"A little collection of certificates, badges, and proof I showed up — each one links back to the real file on Google Drive so you can check for yourself.","items":[{"id":"itg6p45v","title":"Graphics Design 101: Photoshop Essential Skill","category":"Certificate","issuer":"UpSkillTech","date":"2026-09-12","driveLink":"https://drive.google.com/file/d/14dAxST2jqouctC04080limJRTulV-0Nv/view?usp=sharing","desc":""},{"id":"iolont59","title":"IT Fundamentals: Intro to Information System","category":"Certificate","issuer":"UpSkillTech","date":"2026-09-11","driveLink":"https://drive.google.com/file/d/1OrVpr-4ZEssbrwoz1zxpT1A_1pJ2a9tH/view?usp=sharing","desc":""},{"id":"i0ky04ot","title":"AI Fundamentals: AI Automation Isn't Scary","category":"Certificate","issuer":"UpSkillTech","date":"2026-09-12","driveLink":"https://drive.google.com/file/d/10wefUmyeCbERpS3xxFqW-_ujaizPx9tQ/view?usp=sharing","desc":""},{"id":"i0nsmatg","title":"Learning Advocate 2026 Series: Emerging IT Innovation","category":"Certificate","issuer":"UpSkillTech","date":"2026-08-22","driveLink":"https://drive.google.com/file/d/1NnqDnIhYyJQQrCr87xtgdlAVpQ-6M2RZ/view?usp=sharing","desc":""},{"id":"ikrnae1t","title":"Securing AI 101","category":"Certificate","issuer":"BlackStride Cyber","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1O26umRVofWTEND_P4eAPb3WIeFxwkQZ-/view?usp=sharing","desc":""},{"id":"i04ok53b","title":"Database 101: Data Storage, SQL And Query Optimization","category":"Certificate","issuer":"UpSkillTech","date":"2026-08-21","driveLink":"https://drive.google.com/file/d/1j0gnE3TPE_6QWc8s14uc89vi5HzCIkyT/view?usp=sharing","desc":""},{"id":"i849pzv0","title":"Graphics Design 101: Photoshop Essential Skill","category":"Attendance","issuer":"UpSkillTech","date":"2026-08-12","driveLink":"https://drive.google.com/file/d/1weZYS2SHBt7VpWEYANC3bP3_K2Zd2xdm/view?usp=sharing","desc":""},{"id":"imwpvuzt","title":"Introduction to Modern AI","category":"Badge","issuer":"Cisco","date":"2026-08-27","driveLink":"https://drive.google.com/file/d/1PKvI_aW9SPnPDZMw-obG_0Z4MA_OuLBY/view?usp=sharing","desc":""},{"id":"io2gfivh","title":"Introduction To Internet Of Things","category":"Badge","issuer":"","date":"2026-08-27","driveLink":"https://drive.google.com/file/d/1EwKHQvL1e1WHs8yQV5dRThWVRIR1AEQt/view?usp=sharing","desc":""},{"id":"ip7hzkr8","title":"Introduction to Greenhouse Accounting For IT","category":"Badge","issuer":"Cisco","date":"2026-08-30","driveLink":"https://drive.google.com/file/d/1HTltAyzylsqneAglcg-o25wFWNZOBBPb/view?usp=sharing","desc":""},{"id":"i3dwtttb","title":"Creating Compelling Reports","category":"Badge","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1naFgfhRdXqAc-K4PNsAhRV1HLnp4iUW-/view?usp=sharing","desc":""},{"id":"ivqkh9z0","title":"Create Digital Content, Communicate and Collaborate Online","category":"Badge","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1SznLGmYhhG6OpgkLHEopp3jxuRge7Jop/view?usp=sharing","desc":""},{"id":"iuhebsgg","title":"Computer Hardware Basic","category":"Badge","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1feX1z1vKnGZv731hT6Jn1MlQQvt4BYcP/view?usp=sharing","desc":""},{"id":"izcnxcv6","title":"Introduction to Greenhouse Gas Accounting for IT","category":"Certificate","issuer":"Cisco","date":"2026-08-30","driveLink":"https://drive.google.com/file/d/1gSP8G4BL2CSZ125wRZD9m4KffPiPBxGB/view?usp=sharing","desc":""},{"id":"ibyegj1y","title":"Exploring Internet Of Things With Cisco Packet Tracer","category":"Certificate","issuer":"Cisco","date":"2026-08-30","driveLink":"https://drive.google.com/file/d/1OwITsaCb6Pftvh3uZ1RQBXO-l6rvYucp/view?usp=sharing","desc":""},{"id":"iyxe4d3q","title":"Computer Hardware Basic","category":"Certificate","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1vtTnvF-plkxN8F6-t-sQ8myTN8Jyd4I7/view?usp=sharing","desc":""},{"id":"ibstfgw5","title":"Create Digital Content, Communicate and Collaborate Online","category":"Certificate","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1CaTj_8e44pf1Y6IRnHrSmITvbg1ukyqg/view?usp=sharing","desc":""},{"id":"ic7f11tb","title":"Exploring Networking with Cisco Packet Tracers","category":"Certificate","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1y0CjlhT36MkMPi2THWBkiKJQ1q5V1C9L/view?usp=sharing","desc":""},{"id":"iip7gg27","title":"Creating Compelling Reports","category":"Certificate","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/17eWEs_Ba3l5HqXaEIEo7RVuanNQ4rJKa/view?usp=sharing","desc":""},{"id":"iegfw300","title":"Introduction To IOT And Digital Transformation","category":"Certificate","issuer":"Cisco","date":"2026-08-27","driveLink":"https://drive.google.com/file/d/1-QBaKJSEB_xzjDfIuV7UqPfsZDqhZQ3P/view?usp=sharing","desc":""},{"id":"ivs6toxd","title":"Introduction To Modern Ai","category":"Certificate","issuer":"Cisco","date":"2026-08-27","driveLink":"https://drive.google.com/file/d/1V66aqIOSVIvoSFtavAt3877KPWYeyn5B/view?usp=sharing","desc":""},{"id":"i7oa762u","title":"Information Technology Fundamentals","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/112A2ySfZYj8vxRWzklLAoQn5BdmAsjjo/view?usp=sharing","desc":""},{"id":"i5w52inl","title":"TroubleShooting For Hardware, Networks, And Software","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1CjBbhG_6KnSOKlns0ds5dx3R5nqV3Ery/view?usp=sharing","desc":""},{"id":"ijdynum7","title":"Security Basic","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1UFfkVS57q7SoN_FMRpVMGhxKnGfntN-y/view?usp=sharing","desc":""},{"id":"ii58uw77","title":"Computing From Past To Present","category":"Certificate","issuer":"IBM SkillBuild","date":"2005-08-31","driveLink":"https://drive.google.com/file/d/1NQxjb7lj3_z7fXOtoAs0kBocBcDV9haZ/view?usp=sharing","desc":""},{"id":"i4gb7yce","title":"Your Future IT Support: The Job Landscape","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1xK6g0wMCJXhHCUnFamqMJZbeDHU1sBOV/view?usp=drive_link","desc":""},{"id":"iqz3ts6n","title":"Support Customer with a Network Issue","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1x9mn2ur9UpZU-d0SWh2w_UwfOQ41Wkk4/view?usp=sharing","desc":""},{"id":"iqd8a2cq","title":"Support Basic","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1Oen8-Sog7QwZOIYCyXcdDfxvFk-ylnpG/view?usp=sharing","desc":""},{"id":"igncy4xg","title":"Computer Networking Basic: How Computers Communicate","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/19CdxxtB9nfiQ-gPjtjIucB92orME1fE7/view?usp=sharing","desc":""},{"id":"ig7mnmpx","title":"Computer Basic","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1xK6g0wMCJXhHCUnFamqMJZbeDHU1sBOV/view?usp=drive_link","desc":""}],"aboutMe":"## About Me\n\nI am Zaira D. Remalla, an Information Technology student who is interested in learning more about technology and developing my skills outside the classroom. As a student, I believe that learning does not only happen through regular school subjects. I also learn by attending online seminars, webinars, training sessions, and courses related to Information Technology.\n\nI created this project to document some of the online learning activities I have attended. Through these seminars and courses, I was able to explore different topics such as Information Technology fundamentals, artificial intelligence, cybersecurity, database management, networking, computer hardware, digital content, and Internet of Things.\n\nThese experiences helped me gain additional knowledge and encouraged me to continue improving my technical skills. The certificates, badges, and attendance proofs included in this website represent my participation and learning experiences as an IT student.","aboutSite":"About the Seminars and Tours Website\n\nSeminars and Tours - is a personal website created as my midterm project to showcase and organize the online seminars, webinars, courses, and learning activities I have attended.\n\nThe website serves as a digital collection of my certificates, digital badges, and proof of attendance. It organizes the records into three categories: **Certificates, Badges, and Proof of Attendance**, making it easier to browse and find a specific learning activity.\n\nThe website includes learning activities from different providers and organizations, including **UpSkillTech, Cisco, IBM SkillBuild, and BlackStride Cyber**. Some of the topics included are Information Technology Fundamentals, AI, cybersecurity, database management, computer hardware, networking, Internet of Things, and digital content.\n\nEach entry can also be verified through a link connected to its corresponding Google Drive file. This allows the certificates and other documents to be viewed as supporting evidence of my participation.\n\nThe main purpose of this website is to keep my learning records organized in one place while also presenting my continuous learning and development as an Information Technology student.","profilePhoto":null}</script>
-
+ 
 <div class="wrap">
   <header class="hero">
     <p class="eyebrow">A CERTIFICATE SCRAPBOOK</p>
@@ -312,18 +356,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--pink-deep)" stroke-width="1.8"><path d="M12 21s-7-6.5-7-11.5A7 7 0 0 1 19 9.5C19 14.5 12 21 12 21Z"></path><circle cx="12" cy="9.5" r="2.2"></circle></svg>
       <span class="hline"></span>
     </div>
-    <div id="ownerRow" style="display: block;">
-      <button class="edit-meta-btn" id="editMetaBtn">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
-        Edit title &amp; intro
-      </button>
-      <button class="edit-meta-btn" id="downloadBtn" style="display: inline-flex; margin-left: 8px;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
-        Download updated page
-      </button>
-    </div>
   </header>
-
+ 
   <div id="pageGallery" class="page-section show" style="display: block;">
   <div class="chips" id="chips">
     <button class="chip" data-cat="all">All</button>
@@ -331,7 +365,7 @@
     <button class="chip" data-cat="Badge">Badges</button>
     <button class="chip" data-cat="Attendance">Proof of attendance</button>
   </div>
-
+ 
   <div id="gridArea"><div class="grid"><div class="card">
       <div class="thumb-wrap">
         <img src="https://drive.google.com/thumbnail?id=14dAxST2jqouctC04080limJRTulV-0Nv&amp;sz=w800" alt="Graphics Design 101: Photoshop Essential Skill" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
@@ -724,7 +758,7 @@
       </div>
     </div></div></div>
   </div>
-
+ 
   <div id="pageAboutMe" class="page-section" style="display: none;">
     <h2 class="page-title">About me</h2>
     <div class="avatar-wrap" id="avatarWrap">
@@ -754,11 +788,11 @@
       </form>
     </div>
     <div class="about-content" id="aboutMeContent" style="display: block;">## About Me
-
+ 
 I am Zaira D. Remalla, an Information Technology student who is interested in learning more about technology and developing my skills outside the classroom. As a student, I believe that learning does not only happen through regular school subjects. I also learn by attending online seminars, webinars, training sessions, and courses related to Information Technology.
-
+ 
 I created this project to document some of the online learning activities I have attended. Through these seminars and courses, I was able to explore different topics such as Information Technology fundamentals, artificial intelligence, cybersecurity, database management, networking, computer hardware, digital content, and Internet of Things.
-
+ 
 These experiences helped me gain additional knowledge and encouraged me to continue improving my technical skills. The certificates, badges, and attendance proofs included in this website represent my participation and learning experiences as an IT student.</div>
     <form id="aboutMeForm" style="display: none; max-width: 640px; margin: 0px auto;">
       <div class="field">
@@ -774,19 +808,19 @@ These experiences helped me gain additional knowledge and encouraged me to conti
       Edit
     </button>
   </div>
-
+ 
   <div id="pageAboutSite" class="page-section" style="display: none;">
     <h2 class="page-title">About this website</h2>
     <div class="about-content" id="aboutSiteContent" style="display: block;">About the Seminars and Tours Website
-
+ 
 Seminars and Tours - is a personal website created as my midterm project to showcase and organize the online seminars, webinars, courses, and learning activities I have attended.
-
+ 
 The website serves as a digital collection of my certificates, digital badges, and proof of attendance. It organizes the records into three categories: **Certificates, Badges, and Proof of Attendance**, making it easier to browse and find a specific learning activity.
-
+ 
 The website includes learning activities from different providers and organizations, including **UpSkillTech, Cisco, IBM SkillBuild, and BlackStride Cyber**. Some of the topics included are Information Technology Fundamentals, AI, cybersecurity, database management, computer hardware, networking, Internet of Things, and digital content.
-
+ 
 Each entry can also be verified through a link connected to its corresponding Google Drive file. This allows the certificates and other documents to be viewed as supporting evidence of my participation.
-
+ 
 The main purpose of this website is to keep my learning records organized in one place while also presenting my continuous learning and development as an Information Technology student.</div>
     <form id="aboutSiteForm" style="display: none; max-width: 640px; margin: 0px auto;">
       <div class="field">
@@ -803,12 +837,8 @@ The main purpose of this website is to keep my learning records organized in one
     </button>
   </div>
 </div>
-
-
-<button class="fab" id="fabAdd" style="display: none;" aria-label="Add item">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
-</button>
-
+ 
+ 
 <!-- Add / edit item modal -->
 <div class="overlay" id="itemOverlay">
   <div class="modal">
@@ -859,7 +889,7 @@ The main purpose of this website is to keep my learning records organized in one
     </form>
   </div>
 </div>
-
+ 
 <!-- Edit page title/intro modal -->
 <div class="overlay" id="metaOverlay">
   <div class="modal">
@@ -881,11 +911,11 @@ The main purpose of this website is to keep my learning records organized in one
     </form>
   </div>
 </div>
-
+ 
 <div class="toast" id="toast">Saved in this browser. Download the updated page to publish it.</div>
-
+ 
 <footer>Made with care 🌷</footer>
-
+ 
 <script>
 (function(){
   const ICONS = {
@@ -894,7 +924,7 @@ The main purpose of this website is to keep my learning records organized in one
     Attendance: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="m8.5 14 2 2 4-4"/></svg>'
   };
   const DRIVE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="m9 15 3-4 3 4"/></svg>';
-
+ 
   let state = JSON.parse(document.getElementById('site-data').textContent);
   let activeCat = 'all';
   let editingId = null;
@@ -902,12 +932,12 @@ The main purpose of this website is to keep my learning records organized in one
   let artifactApi = null;
   let standaloneMode = false;
   const LOCAL_KEY = 'seminars-and-tours-state';
-
+ 
   const $ = (sel) => document.querySelector(sel);
   const gridArea = $('#gridArea');
-
+ 
   function uid(){ return 'i' + Math.random().toString(36).slice(2, 9); }
-
+ 
   function driveIdFromLink(url){
     if(!url) return null;
     const patterns = [
@@ -921,11 +951,11 @@ The main purpose of this website is to keep my learning records organized in one
     }
     return null;
   }
-
+ 
   function escapeHtml(s){
     return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
-
+ 
   function fmtDate(d){
     if(!d) return '';
     try{
@@ -933,13 +963,13 @@ The main purpose of this website is to keep my learning records organized in one
       return dt.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
     }catch(e){ return d; }
   }
-
+ 
   function renderMeta(){
     $('#siteTitle').textContent = state.title;
     $('#siteSub').textContent = state.subtitle;
     document.title = state.title;
   }
-
+ 
   function renderGrid(){
     const items = state.items.filter(it => activeCat === 'all' || it.category === activeCat);
     if(items.length === 0){
@@ -956,7 +986,7 @@ The main purpose of this website is to keep my learning records organized in one
       if(delBtn) delBtn.addEventListener('click', () => deleteItem(it.id));
     });
   }
-
+ 
   function renderEmpty(){
     if(isOwner){
       return `<div class="empty">
@@ -972,7 +1002,7 @@ The main purpose of this website is to keep my learning records organized in one
       <p>Check back soon — this garden is still growing.</p>
     </div>`;
   }
-
+ 
   function cardHtml(it){
     const fileId = driveIdFromLink(it.driveLink);
     const thumb = fileId
@@ -995,10 +1025,10 @@ The main purpose of this website is to keep my learning records organized in one
       </div>
     </div>`;
   }
-
+ 
   let currentPage = 'gallery';
   const PAGE_SECTIONS = { gallery: 'pageGallery', aboutme: 'pageAboutMe', aboutsite: 'pageAboutSite' };
-
+ 
   function showPage(page){
     currentPage = page;
     Object.entries(PAGE_SECTIONS).forEach(([key, id]) => {
@@ -1012,16 +1042,78 @@ The main purpose of this website is to keep my learning records organized in one
     applyOwnerUI();
     window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
   }
-
+ 
   document.getElementById('pageNav').addEventListener('click', (e) => {
     const btn = e.target.closest('.nav-link');
     if(!btn) return;
     showPage(btn.dataset.page);
   });
-
+ 
+  const navBrandEl = document.getElementById('navBrand');
+  const brandMenuEl = document.getElementById('brandMenu');
+  const brandWrapEl = document.getElementById('brandWrap');
+ 
+  function brandMenuHasItems(){
+    return isOwner;
+  }
+ 
+  function openBrandMenu(){
+    if(!brandMenuHasItems()) return;
+    brandMenuEl.classList.add('open');
+    navBrandEl.classList.add('menu-open');
+    navBrandEl.setAttribute('aria-expanded', 'true');
+  }
+  function closeBrandMenu(){
+    brandMenuEl.classList.remove('open');
+    navBrandEl.classList.remove('menu-open');
+    navBrandEl.setAttribute('aria-expanded', 'false');
+  }
+  function toggleBrandMenu(){
+    if(brandMenuEl.classList.contains('open')) closeBrandMenu();
+    else openBrandMenu();
+  }
+  function updateBrandMenuAvailability(){
+    if(!brandMenuHasItems()) closeBrandMenu();
+  }
+ 
+  if(navBrandEl){
+    navBrandEl.addEventListener('click', () => {
+      if(brandMenuHasItems()){
+        toggleBrandMenu();
+      } else {
+        showPage('gallery');
+      }
+    });
+    navBrandEl.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        if(brandMenuHasItems()) toggleBrandMenu();
+        else showPage('gallery');
+      } else if(e.key === 'Escape'){
+        closeBrandMenu();
+      }
+    });
+  }
+ 
+  document.addEventListener('click', (e) => {
+    if(brandWrapEl && !brandWrapEl.contains(e.target)) closeBrandMenu();
+  });
+ 
+  const menuAddItemBtn = document.getElementById('menuAddItem');
+  if(menuAddItemBtn){
+    menuAddItemBtn.addEventListener('click', () => {
+      closeBrandMenu();
+      showPage('gallery');
+      openItemModal();
+    });
+  }
+  const editMetaBtnEl = document.getElementById('editMetaBtn');
+  if(editMetaBtnEl) editMetaBtnEl.addEventListener('click', closeBrandMenu);
+  const downloadBtnEl = document.getElementById('downloadBtn');
+  if(downloadBtnEl) downloadBtnEl.addEventListener('click', closeBrandMenu);
+ 
   function applyOwnerUI(){
-    document.getElementById('fabAdd').style.display = (isOwner && currentPage === 'gallery') ? 'flex' : 'none';
-    document.getElementById('ownerRow').style.display = isOwner ? 'block' : 'none';
+    updateBrandMenuAvailability();
     const amEdit = document.getElementById('aboutMeEditBtn');
     const asEdit = document.getElementById('aboutSiteEditBtn');
     if(amEdit) amEdit.style.display = isOwner ? 'inline-flex' : 'none';
@@ -1030,7 +1122,7 @@ The main purpose of this website is to keep my learning records organized in one
     if(avatarActions) avatarActions.style.display = isOwner ? 'flex' : 'none';
     renderAvatar();
   }
-
+ 
   // ---- chips ----
   document.getElementById('chips').addEventListener('click', (e) => {
     const chip = e.target.closest('.chip');
@@ -1040,7 +1132,7 @@ The main purpose of this website is to keep my learning records organized in one
     activeCat = chip.dataset.cat;
     renderGrid();
   });
-
+ 
   // ---- item modal ----
   const itemOverlay = document.getElementById('itemOverlay');
   function openItemModal(id){
@@ -1060,14 +1152,14 @@ The main purpose of this website is to keep my learning records organized in one
   function closeItemModal(){ itemOverlay.classList.remove('show'); editingId = null; }
   document.getElementById('itemCancel').addEventListener('click', closeItemModal);
   itemOverlay.addEventListener('click', (e) => { if(e.target === itemOverlay) closeItemModal(); });
-
+ 
   document.getElementById('f-link').addEventListener('input', (e) => {
     const id = driveIdFromLink(e.target.value);
     $('#linkNote').textContent = e.target.value
       ? (id ? '' : "Couldn't find a file ID in this link — make sure it's a Google Drive share link.")
       : '';
   });
-
+ 
   document.getElementById('itemForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const title = $('#f-title').value.trim();
@@ -1087,14 +1179,14 @@ The main purpose of this website is to keep my learning records organized in one
     renderGrid();
     persist('Saved! Visitors will see this update.');
   });
-
+ 
   function deleteItem(id){
     if(!confirm('Remove this item from the garden?')) return;
     state.items = state.items.filter(x => x.id !== id);
     renderGrid();
     persist('Removed.');
   }
-
+ 
   // ---- meta modal ----
   const metaOverlay = document.getElementById('metaOverlay');
   document.getElementById('editMetaBtn').addEventListener('click', () => {
@@ -1112,9 +1204,9 @@ The main purpose of this website is to keep my learning records organized in one
     renderMeta();
     persist('Saved! Visitors will see this update.');
   });
-
-  document.getElementById('fabAdd').addEventListener('click', () => openItemModal());
-
+ 
+ 
+ 
   // ---- about pages ----
   function refreshAboutView(key){
     const content = document.getElementById(key === 'aboutMe' ? 'aboutMeContent' : 'aboutSiteContent');
@@ -1123,13 +1215,13 @@ The main purpose of this website is to keep my learning records organized in one
     content.style.display = 'block';
     form.style.display = 'none';
   }
-
+ 
   function setupAboutEditor(key, contentId, formId, textareaId, editBtnId, cancelId){
     const content = document.getElementById(contentId);
     const form = document.getElementById(formId);
     const textarea = document.getElementById(textareaId);
     const editBtn = document.getElementById(editBtnId);
-
+ 
     function showView(){
       content.textContent = state[key] || '';
       content.style.display = 'block';
@@ -1142,7 +1234,7 @@ The main purpose of this website is to keep my learning records organized in one
       editBtn.style.display = 'none';
       form.style.display = 'block';
     }
-
+ 
     editBtn.addEventListener('click', showEdit);
     document.getElementById(cancelId).addEventListener('click', showView);
     form.addEventListener('submit', (e) => {
@@ -1152,10 +1244,10 @@ The main purpose of this website is to keep my learning records organized in one
       persist('Saved! Visitors will see this update.');
     });
   }
-
+ 
   setupAboutEditor('aboutMe', 'aboutMeContent', 'aboutMeForm', 'am-text', 'aboutMeEditBtn', 'aboutMeCancel');
   setupAboutEditor('aboutSite', 'aboutSiteContent', 'aboutSiteForm', 'as-text', 'aboutSiteEditBtn', 'aboutSiteCancel');
-
+ 
   // ---- profile photo ----
   function avatarImageUrl(){
     if(!state.profilePhoto || !state.profilePhoto.url) return null;
@@ -1163,7 +1255,7 @@ The main purpose of this website is to keep my learning records organized in one
     const fileId = driveIdFromLink(raw);
     return fileId ? `https://drive.google.com/thumbnail?id=${fileId}&sz=w800` : raw;
   }
-
+ 
   function renderAvatar(){
     const img = document.getElementById('avatarImg');
     const placeholder = document.getElementById('avatarPlaceholder');
@@ -1180,13 +1272,13 @@ The main purpose of this website is to keep my learning records organized in one
       if(removeBtn) removeBtn.style.display = 'none';
     }
   }
-
+ 
   const avatarLinkBtn = document.getElementById('avatarLinkBtn');
   const avatarLinkForm = document.getElementById('avatarLinkForm');
   const avatarLinkCancel = document.getElementById('avatarLinkCancel');
   const avatarRemoveBtn = document.getElementById('avatarRemoveBtn');
   const avatarActions = document.getElementById('avatarActions');
-
+ 
   function showAvatarLinkForm(){
     document.getElementById('f-avatar-link').value = (state.profilePhoto && state.profilePhoto.url) || '';
     avatarLinkForm.style.display = 'block';
@@ -1212,7 +1304,7 @@ The main purpose of this website is to keep my learning records organized in one
     renderAvatar();
     persist('Removed.');
   });
-
+ 
   // ---- toast ----
   let toastTimer = null;
   function showToast(msg){
@@ -1222,13 +1314,13 @@ The main purpose of this website is to keep my learning records organized in one
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
   }
-
+ 
   // ---- persistence ----
   function buildFullHtml(){
     document.getElementById('site-data').textContent = JSON.stringify(state);
     return '<!doctype html>\n' + document.documentElement.outerHTML;
   }
-
+ 
   function downloadHtml(){
     const html = buildFullHtml();
     const blob = new Blob([html], { type: 'text/html' });
@@ -1241,7 +1333,7 @@ The main purpose of this website is to keep my learning records organized in one
     a.remove();
     URL.revokeObjectURL(url);
   }
-
+ 
   function persist(successMsg){
     if(artifactApi && isOwner){
       const html = buildFullHtml();
@@ -1263,19 +1355,19 @@ The main purpose of this website is to keep my learning records organized in one
       showToast('Preview only — publish this page to save changes for visitors.');
     }
   }
-
+ 
   // ---- init ----
   renderMeta();
   renderGrid();
   renderAvatar();
-
+ 
   function withTimeout(promise, ms){
     return Promise.race([
       promise,
       new Promise((resolve) => setTimeout(() => resolve(null), ms))
     ]);
   }
-
+ 
   async function init(){
     let user = null;
     let hasClaudeRuntime = false;
@@ -1285,7 +1377,7 @@ The main purpose of this website is to keep my learning records organized in one
         hasClaudeRuntime = true;
       }
     }catch(e){ user = null; }
-
+ 
     if(user){
       // Running inside claude.ai with the runtime granted.
       isOwner = !!(user.isOwner && user.isOwner());
@@ -1308,16 +1400,16 @@ The main purpose of this website is to keep my learning records organized in one
       const dlBtn = document.getElementById('downloadBtn');
       if(dlBtn) dlBtn.style.display = 'inline-flex';
     }
-
+ 
     applyOwnerUI();
     renderMeta();
     renderGrid();
   }
   init();
-
+ 
   document.getElementById('downloadBtn').addEventListener('click', downloadHtml);
 })();
 </script>
-
-
+ 
+ 
 </body></html>
