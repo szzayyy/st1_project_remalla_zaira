@@ -265,6 +265,20 @@
   .top-nav-brand:hover .brand-menu-caret{ opacity: .6; }
   .top-nav-brand.menu-open .brand-menu-caret{ transform: rotate(180deg); }
  
+  /* Home page */
+  .home-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin: 30px 0 10px; }
+  .home-btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:'Quicksand'; font-weight:700; font-size:.94rem;
+    padding: 13px 24px; border-radius:999px; cursor:pointer; text-decoration:none; border: 1.5px solid transparent;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .home-btn:hover{ transform: translateY(-1px); }
+  .home-btn.filled{ background: var(--pink-deep); color:#fff; }
+  .home-btn.filled:hover{ background: var(--pink); }
+  .home-btn.outline{ background: var(--paper); color: var(--pink-deep); border-color: var(--line); }
+  .home-btn.outline:hover{ border-color: var(--pink); }
+  .home-btn svg{ width:16px; height:16px; flex-shrink:0; }
+ 
   /* profile photo uploader */
   .avatar-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; margin: 4px 0 22px; }
   .avatar-circle{
@@ -303,9 +317,8 @@
       </div>
     </div>
     <div class="nav-links" id="pageNav">
-      <button class="nav-link active" data-page="gallery">Certificates &amp; Badges</button>
-      <button class="nav-link" data-page="aboutme">About Me</button>
-      <button class="nav-link" data-page="aboutsite">About This Website</button>
+      <button class="nav-link active" data-page="home">Home</button>
+      <button class="nav-link" data-page="gallery" id="navCredentials">My Credentials</button>
     </div>
   </div>
 </nav>
@@ -358,10 +371,23 @@
     </div>
   </header>
  
-  <div id="pageGallery" class="page-section show" style="display: block;">
+  <div id="pageHome" class="page-section show" style="display: block;">
+    <div class="home-actions">
+      <button type="button" class="home-btn filled" id="homeAboutMeBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path></svg>
+        About Me
+      </button>
+      <button type="button" class="home-btn outline" id="homeAboutSiteBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path><path d="M8 4v5"></path></svg>
+        About This Website
+      </button>
+    </div>
+  </div>
+ 
+  <div id="pageGallery" class="page-section" style="display: none;">
   <div class="chips" id="chips">
-    <button class="chip" data-cat="all">All</button>
-    <button class="chip active" data-cat="Certificate">Certificates</button>
+    <button class="chip active" data-cat="all">All</button>
+    <button class="chip" data-cat="Certificate">Certificates</button>
     <button class="chip" data-cat="Badge">Badges</button>
     <button class="chip" data-cat="Attendance">Proof of attendance</button>
   </div>
@@ -1026,15 +1052,15 @@ The main purpose of this website is to keep my learning records organized in one
     </div>`;
   }
  
-  let currentPage = 'gallery';
-  const PAGE_SECTIONS = { gallery: 'pageGallery', aboutme: 'pageAboutMe', aboutsite: 'pageAboutSite' };
+  let currentPage = 'home';
+  const PAGE_SECTIONS = { home: 'pageHome', gallery: 'pageGallery', aboutme: 'pageAboutMe', aboutsite: 'pageAboutSite' };
  
   function showPage(page){
     currentPage = page;
     Object.entries(PAGE_SECTIONS).forEach(([key, id]) => {
       document.getElementById(id).style.display = (key === page) ? 'block' : 'none';
     });
-    document.querySelectorAll('#pageNav .nav-link').forEach(btn => {
+    document.querySelectorAll('#pageNav > .nav-link').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.page === page);
     });
     if(page === 'aboutme') refreshAboutView('aboutMe');
@@ -1046,8 +1072,19 @@ The main purpose of this website is to keep my learning records organized in one
   document.getElementById('pageNav').addEventListener('click', (e) => {
     const btn = e.target.closest('.nav-link');
     if(!btn) return;
+    if(btn.dataset.page === 'gallery'){ activeCat = 'all'; renderChips(); }
     showPage(btn.dataset.page);
+    renderGrid();
   });
+ 
+  document.getElementById('homeAboutMeBtn').addEventListener('click', () => showPage('aboutme'));
+  document.getElementById('homeAboutSiteBtn').addEventListener('click', () => showPage('aboutsite'));
+ 
+  function renderChips(){
+    document.querySelectorAll('#chips .chip').forEach(c => {
+      c.classList.toggle('active', c.dataset.cat === activeCat);
+    });
+  }
  
   const navBrandEl = document.getElementById('navBrand');
   const brandMenuEl = document.getElementById('brandMenu');
