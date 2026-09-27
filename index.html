@@ -1,0 +1,1323 @@
+<!doctype html>
+<html lang="en" data-theme="dark" style="color-scheme: dark;"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Seminars And Tours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Quicksand:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light;
+    --bg: #FFFFFF;
+    --paper: #FFFFFF;
+    --pink-soft: #FDEEF4;
+    --pink: #F9C7DC;
+    --pink-deep: #EFA0C2;
+    --pink-deepest: #E27FAD;
+    --mauve: #7D5468;
+    --mauve-soft: #A98A9B;
+    --gold: #F9C7DC;
+    --line: #FBE3ED;
+    --shadow: rgba(226, 127, 173, 0.14);
+    --tape: #FDEEF4;
+    --radius: 18px;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+  html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
+  *{ box-sizing: border-box; }
+  html,body{ height: 100%; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--mauve);
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    min-height: 100%;
+  }
+  a{ color: inherit; }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 20px 80px; position: relative; }
+
+  /* quiet corner decorations, no motion — matches reference */
+  .corner-deco{ position: fixed; pointer-events: none; z-index: 0; opacity: .75; }
+  .corner-deco svg{ width: 100%; height: 100%; display:block; }
+  .corner-deco.flower{ top: 90px; left: 4%; width: 54px; height: 54px; }
+  .corner-deco.ribbon-tr{ top: 90px; right: 5%; width: 46px; height: 32px; }
+  .corner-deco.ribbon-bl{ top: 60%; left: 5%; width: 40px; height: 28px; }
+  .corner-deco.bfly{ top: 40%; right: 6%; width: 42px; height: 32px; }
+  @media (max-width: 780px){ .corner-deco{ display:none; } }
+
+  header.hero{ position:relative; padding: 56px 0 28px; text-align:center; z-index:1; }
+  .eyebrow{
+    font-family:'Quicksand'; font-weight:700; font-size:.72rem; letter-spacing:.16em;
+    color: var(--pink-deep); margin: 0 0 14px;
+  }
+  .site-title{
+    font-family:'Cormorant Garamond', serif; font-style: normal; font-weight:600;
+    font-size: clamp(2.3rem, 6vw, 3.6rem); margin: 0; color: var(--pink-deepest);
+    letter-spacing: 0.2px;
+  }
+  .site-sub{ margin: 14px auto 0; max-width: 46ch; color: var(--mauve-soft); font-weight: 600; line-height:1.5; }
+  .hero-divider{ display:flex; align-items:center; justify-content:center; gap:10px; margin: 22px 0 4px; }
+  .hero-divider .hline{ width:44px; height:1px; background: var(--pink); }
+  .hero-divider svg{ width:14px; height:14px; }
+  .edit-meta-btn{
+    margin-top:16px; display:inline-flex; align-items:center; gap:6px;
+    background: var(--paper); border:1px solid var(--line); color: var(--mauve-soft);
+    padding: 7px 14px; border-radius: 999px; font-family:'Quicksand'; font-weight:700; font-size:.82rem;
+    cursor:pointer;
+  }
+  .edit-meta-btn:hover{ border-color: var(--pink); color: var(--pink-deep); }
+  .page-section{ position:relative; z-index:1; text-align:center; display:none; }
+  .page-section.show{ display:block; }
+  .gallery-link{
+    display:inline-block; margin-top:14px; font-family:'Quicksand'; font-weight:700; font-size:.82rem;
+    color: var(--mauve-soft); text-decoration:none; border-bottom: 1px dashed var(--pink);
+  }
+  .gallery-link:hover{ color: var(--pink-deep); border-color: var(--pink-deep); }
+  .page-title{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.6rem; color: var(--pink-deepest); margin: 8px 0 18px; text-align:center; }
+  .about-content{ white-space: pre-wrap; line-height:1.7; font-weight:600; color: var(--mauve); margin: 0 auto 18px; font-size:.96rem; max-width:640px; text-align:left; }
+  .page-section form .field{ text-align:left; }
+
+  .chips{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin: 8px 0 34px; position:relative; z-index:1; }
+  .chip{
+    font-family:'Quicksand'; font-weight:700; font-size:.86rem; padding: 9px 18px; border-radius: 999px;
+    background: var(--paper); border: 1.5px solid var(--line); color: var(--mauve-soft); cursor:pointer;
+    transition: transform .15s ease, border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .chip:hover{ transform: translateY(-1px); }
+  .chip.active{ background: var(--pink); border-color: var(--pink); color: #fff; }
+
+  .grid{
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 30px 22px;
+    position:relative; z-index:1;
+  }
+
+  .card{
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 14px 16px;
+    box-shadow: 0 10px 24px -16px var(--shadow);
+    position: relative;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform: translateY(-3px); box-shadow: 0 16px 30px -16px var(--shadow); }
+  .thumb-wrap{
+    border-radius: 12px; overflow:hidden; aspect-ratio: 4/3; background: var(--pink-soft);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .thumb-wrap img{ width:100%; height:100%; object-fit: cover; display:block; }
+  .thumb-fallback{ text-align:center; padding: 10px; color: var(--mauve-soft); font-size:.78rem; font-weight:700; }
+  .cat-tag{
+    position:absolute; top:8px; left:8px; background: rgba(255,255,255,.92); color: var(--mauve);
+    font-weight:700; font-size:.7rem; padding: 4px 10px 4px 8px; border-radius: 999px;
+    display:flex; align-items:center; gap:4px; box-shadow: 0 2px 6px var(--shadow);
+  }
+  .cat-tag svg{ width:12px; height:12px; }
+
+  .card h3{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.08rem; margin: 12px 2px 2px; color: var(--mauve); }
+  .card .meta{ margin: 0 2px 12px; font-size:.82rem; color: var(--mauve-soft); font-weight:600; }
+  .card .desc{ margin: -6px 2px 12px; font-size:.82rem; color: var(--mauve-soft); line-height:1.45; }
+
+  .card-actions{ display:flex; align-items:center; gap:8px; padding: 0 2px; }
+  .verify-btn{
+    flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
+    background: var(--pink); color:#fff; text-decoration:none; font-weight:700; font-size:.82rem;
+    padding: 9px 10px; border-radius: 999px; transition: background .15s ease, transform .15s ease;
+  }
+  .verify-btn:hover{ background: var(--pink-deep); transform: translateY(-1px); }
+  .verify-btn svg{ width:14px; height:14px; flex-shrink:0; }
+  .icon-btn{
+    width:34px; height:34px; border-radius:999px; border:1.5px solid var(--line); background: var(--paper);
+    color: var(--mauve-soft); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;
+  }
+  .icon-btn:hover{ border-color: var(--pink); color: var(--pink-deep); }
+  .icon-btn svg{ width:15px; height:15px; }
+
+  .empty{
+    text-align:center; padding: 60px 20px; position:relative; z-index:1;
+  }
+  .empty svg{ width:80px; height:80px; margin-bottom:14px; }
+  .empty h3{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:1.3rem; margin:0 0 8px; }
+  .empty p{ color: var(--mauve-soft); font-weight:600; max-width:38ch; margin: 0 auto 18px; line-height:1.5; }
+
+  .fab{
+    position:fixed; right: max(22px, env(safe-area-inset-right,0px)); bottom: max(22px, env(safe-area-inset-bottom,0px));
+    width:58px; height:58px; border-radius:50%; background: var(--pink-deep); color:#fff; border:none;
+    box-shadow: 0 10px 22px -6px var(--shadow); cursor:pointer; display:flex; align-items:center; justify-content:center;
+    z-index: 20; transition: transform .15s ease;
+  }
+  .fab:hover{ transform: scale(1.06); }
+  .fab svg{ width:26px; height:26px; }
+  .fab-add-first{
+    display:inline-flex; align-items:center; gap:8px; background: var(--pink-deep); color:#fff; border:none;
+    padding: 12px 20px; border-radius:999px; font-family:'Quicksand'; font-weight:700; cursor:pointer; font-size:.92rem;
+  }
+  .fab-add-first:hover{ background: var(--pink); }
+
+  .overlay{
+    position:fixed; inset:0; background: rgba(60,30,45,.38); backdrop-filter: blur(2px);
+    display:flex; align-items:flex-end; justify-content:center; z-index: 40; opacity:0; pointer-events:none;
+    transition: opacity .18s ease;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  @media (min-width: 640px){ .overlay{ align-items:center; } }
+  .modal{
+    background: var(--paper); width:100%; max-width: 480px; max-height: 88vh; overflow-y:auto;
+    border-radius: 20px 20px 0 0; padding: 26px 22px calc(24px + env(safe-area-inset-bottom,0px));
+    transform: translateY(16px); transition: transform .18s ease;
+  }
+  .overlay.show .modal{ transform: translateY(0); }
+  @media (min-width: 640px){ .modal{ border-radius: 20px; } }
+  .modal h2{ font-family:'Cormorant Garamond', serif; font-style: italic; font-weight:600; margin:0 0 4px; font-size:1.4rem; }
+  .modal .hint{ color: var(--mauve-soft); font-size:.8rem; margin: 0 0 18px; line-height:1.5; font-weight:600; }
+  .field{ margin-bottom: 14px; }
+  .field label{ display:block; font-weight:700; font-size:.8rem; margin-bottom:6px; color: var(--mauve); }
+  .field input, .field select, .field textarea{
+    width:100%; padding: 10px 12px; border-radius:10px; border:1.5px solid var(--line);
+    background: var(--bg); color: var(--mauve); font-family:'Quicksand'; font-weight:600; font-size:.92rem;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:2px solid var(--pink); outline-offset:1px; border-color: var(--pink); }
+  .field textarea{ resize: vertical; min-height: 60px; }
+  .field .fieldnote{ font-size:.72rem; color: var(--mauve-soft); margin-top:5px; line-height:1.4; }
+  .howto{
+    background: var(--pink-soft); border-radius:12px; padding: 12px 14px; font-size:.78rem; line-height:1.55;
+    color: var(--mauve); margin-bottom:16px; font-weight:600;
+  }
+  .howto ol{ margin: 6px 0 0; padding-left: 18px; }
+  .modal-actions{ display:flex; gap:10px; margin-top: 18px; }
+  .btn{
+    flex:1; padding: 12px; border-radius: 999px; border:none; font-family:'Quicksand'; font-weight:700;
+    font-size:.92rem; cursor:pointer;
+  }
+  .btn.primary{ background: var(--pink-deep); color:#fff; }
+  .btn.primary:hover{ background: var(--pink); }
+  .btn.ghost{ background: transparent; color: var(--mauve-soft); border: 1.5px solid var(--line); }
+  .btn.ghost:hover{ border-color: var(--pink); color: var(--pink-deep); }
+  .btn.danger{ background: transparent; color:#C4587A; border: 1.5px solid #EFC7D3; }
+
+  .toast{
+    position:fixed; left:50%; bottom: max(24px, env(safe-area-inset-bottom,0px)); transform: translate(-50%, 20px);
+    background: var(--mauve); color: var(--paper); padding: 12px 20px; border-radius: 999px; font-weight:700;
+    font-size:.85rem; opacity:0; pointer-events:none; transition: opacity .2s ease, transform .2s ease; z-index: 60;
+    max-width: 90vw; text-align:center;
+  }
+  .toast.show{ opacity:1; transform: translate(-50%, 0); }
+
+  footer{ text-align:center; padding: 30px 0 10px; color: var(--mauve-soft); font-size:.78rem; font-weight:600; position:relative; z-index:1; }
+  .owner-badge{
+    display:inline-flex; align-items:center; gap:6px; background: var(--pink-soft); color: var(--pink-deepest);
+    font-size:.72rem; font-weight:700; padding: 5px 12px; border-radius:999px; margin-bottom: 14px;
+  }
+
+  /* top navigation */
+  .top-nav{
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30;
+    background: rgba(255,255,255,.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top-nav-inner{
+    max-width: 980px; margin: 0 auto; padding: 12px 20px; display:flex; align-items:center;
+    justify-content: space-between; gap: 14px;
+  }
+  .top-nav-brand{
+    font-family:'Cormorant Garamond', serif; font-weight:600; font-size: 1.08rem; color: var(--pink-deepest);
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .nav-links{
+    display:flex; gap: 6px; overflow-x:auto; -webkit-overflow-scrolling: touch; scrollbar-width:none;
+  }
+  .nav-links::-webkit-scrollbar{ display:none; }
+  .nav-link{
+    font-family:'Quicksand'; font-weight:700; font-size:.82rem; white-space:nowrap; padding: 8px 14px;
+    border-radius: 999px; background: transparent; border: 1.5px solid transparent; color: var(--mauve-soft);
+    cursor:pointer; transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .nav-link:hover{ color: var(--pink-deep); }
+  .nav-link.active{ background: var(--pink); border-color: var(--pink); color:#fff; }
+  @media (max-width: 560px){
+    .top-nav-brand{ display:none; }
+    .top-nav-inner{ justify-content:center; }
+  }
+
+  /* profile photo uploader */
+  .avatar-wrap{ display:flex; flex-direction:column; align-items:center; gap:10px; margin: 4px 0 22px; }
+  .avatar-circle{
+    width: 128px; height: 128px; border-radius: 50%; overflow:hidden; background: var(--pink-soft);
+    border: 3px solid var(--pink); display:flex; align-items:center; justify-content:center; position:relative;
+    flex-shrink:0;
+  }
+  .avatar-circle img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .avatar-placeholder{ width:52px; height:52px; color: var(--pink-deep); }
+  .avatar-actions{ display:flex; gap:8px; align-items:center; }
+  .avatar-actions .edit-meta-btn.danger-ghost{ color:#C4587A; border-color:#EFC7D3; }
+</style>
+</head>
+<body>
+
+<nav class="top-nav" id="topNav">
+  <div class="top-nav-inner">
+    <span class="top-nav-brand" id="navBrand">Seminars And Tours</span>
+    <div class="nav-links" id="pageNav">
+      <button class="nav-link active" data-page="gallery">Certificates &amp; Badges</button>
+      <button class="nav-link" data-page="aboutme">About Me</button>
+      <button class="nav-link" data-page="aboutsite">About This Website</button>
+    </div>
+  </div>
+</nav>
+
+<div class="corner-deco flower">
+  <svg viewBox="0 0 48 48" fill="none" stroke="var(--pink)" stroke-width="1.4">
+    <path d="M24 24C20 18 20 10 24 6c4 4 4 12 0 18Z"></path>
+    <path d="M24 24C30 20 38 20 42 24c-4 4-12 4-18 0Z"></path>
+    <path d="M24 24C28 30 28 38 24 42c-4-4-4-12 0-18Z"></path>
+    <path d="M24 24C18 28 10 28 6 24c4-4 12-4 18 0Z"></path>
+  </svg>
+</div>
+<div class="corner-deco ribbon-tr">
+  <svg viewBox="0 0 48 32" fill="none" stroke="var(--gold)" stroke-width="1.4">
+    <path d="M24 16 L8 6 L8 26 Z"></path>
+    <path d="M24 16 L40 6 L40 26 Z"></path>
+    <circle cx="24" cy="16" r="2" fill="var(--gold)" stroke="none"></circle>
+    <path d="M21 18 L18 28M27 18 L30 28"></path>
+  </svg>
+</div>
+<div class="corner-deco ribbon-bl">
+  <svg viewBox="0 0 48 32" fill="none" stroke="var(--pink)" stroke-width="1.4">
+    <path d="M24 16 L8 6 L8 26 Z"></path>
+    <path d="M24 16 L40 6 L40 26 Z"></path>
+    <circle cx="24" cy="16" r="2" fill="var(--pink)" stroke="none"></circle>
+    <path d="M21 18 L18 28M27 18 L30 28"></path>
+  </svg>
+</div>
+<div class="corner-deco bfly">
+  <svg viewBox="0 0 64 48" fill="none">
+    <ellipse cx="20" cy="18" rx="13" ry="9" transform="rotate(-15 20 18)" stroke="var(--pink-deep)" stroke-width="1.5"></ellipse>
+    <ellipse cx="44" cy="18" rx="13" ry="9" transform="rotate(15 44 18)" stroke="var(--pink-deep)" stroke-width="1.5"></ellipse>
+    <ellipse cx="24" cy="31" rx="8" ry="6" transform="rotate(-10 24 31)" stroke="var(--pink-deep)" stroke-width="1.3" opacity=".8"></ellipse>
+    <ellipse cx="40" cy="31" rx="8" ry="6" transform="rotate(10 40 31)" stroke="var(--pink-deep)" stroke-width="1.3" opacity=".8"></ellipse>
+    <line x1="32" y1="11" x2="32" y2="37" stroke="var(--mauve-soft)" stroke-width="1.3" stroke-linecap="round"></line>
+  </svg>
+</div>
+
+<script id="site-data" type="application/json">{"title":"Seminars And Tours","subtitle":"A little collection of certificates, badges, and proof I showed up — each one links back to the real file on Google Drive so you can check for yourself.","items":[{"id":"itg6p45v","title":"Graphics Design 101: Photoshop Essential Skill","category":"Certificate","issuer":"UpSkillTech","date":"2026-09-12","driveLink":"https://drive.google.com/file/d/14dAxST2jqouctC04080limJRTulV-0Nv/view?usp=sharing","desc":""},{"id":"iolont59","title":"IT Fundamentals: Intro to Information System","category":"Certificate","issuer":"UpSkillTech","date":"2026-09-11","driveLink":"https://drive.google.com/file/d/1OrVpr-4ZEssbrwoz1zxpT1A_1pJ2a9tH/view?usp=sharing","desc":""},{"id":"i0ky04ot","title":"AI Fundamentals: AI Automation Isn't Scary","category":"Certificate","issuer":"UpSkillTech","date":"2026-09-12","driveLink":"https://drive.google.com/file/d/10wefUmyeCbERpS3xxFqW-_ujaizPx9tQ/view?usp=sharing","desc":""},{"id":"i0nsmatg","title":"Learning Advocate 2026 Series: Emerging IT Innovation","category":"Certificate","issuer":"UpSkillTech","date":"2026-08-22","driveLink":"https://drive.google.com/file/d/1NnqDnIhYyJQQrCr87xtgdlAVpQ-6M2RZ/view?usp=sharing","desc":""},{"id":"ikrnae1t","title":"Securing AI 101","category":"Certificate","issuer":"BlackStride Cyber","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1O26umRVofWTEND_P4eAPb3WIeFxwkQZ-/view?usp=sharing","desc":""},{"id":"i04ok53b","title":"Database 101: Data Storage, SQL And Query Optimization","category":"Certificate","issuer":"UpSkillTech","date":"2026-08-21","driveLink":"https://drive.google.com/file/d/1j0gnE3TPE_6QWc8s14uc89vi5HzCIkyT/view?usp=sharing","desc":""},{"id":"i849pzv0","title":"Graphics Design 101: Photoshop Essential Skill","category":"Attendance","issuer":"UpSkillTech","date":"2026-08-12","driveLink":"https://drive.google.com/file/d/1weZYS2SHBt7VpWEYANC3bP3_K2Zd2xdm/view?usp=sharing","desc":""},{"id":"imwpvuzt","title":"Introduction to Modern AI","category":"Badge","issuer":"Cisco","date":"2026-08-27","driveLink":"https://drive.google.com/file/d/1PKvI_aW9SPnPDZMw-obG_0Z4MA_OuLBY/view?usp=sharing","desc":""},{"id":"io2gfivh","title":"Introduction To Internet Of Things","category":"Badge","issuer":"","date":"2026-08-27","driveLink":"https://drive.google.com/file/d/1EwKHQvL1e1WHs8yQV5dRThWVRIR1AEQt/view?usp=sharing","desc":""},{"id":"ip7hzkr8","title":"Introduction to Greenhouse Accounting For IT","category":"Badge","issuer":"Cisco","date":"2026-08-30","driveLink":"https://drive.google.com/file/d/1HTltAyzylsqneAglcg-o25wFWNZOBBPb/view?usp=sharing","desc":""},{"id":"i3dwtttb","title":"Creating Compelling Reports","category":"Badge","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1naFgfhRdXqAc-K4PNsAhRV1HLnp4iUW-/view?usp=sharing","desc":""},{"id":"ivqkh9z0","title":"Create Digital Content, Communicate and Collaborate Online","category":"Badge","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1SznLGmYhhG6OpgkLHEopp3jxuRge7Jop/view?usp=sharing","desc":""},{"id":"iuhebsgg","title":"Computer Hardware Basic","category":"Badge","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1feX1z1vKnGZv731hT6Jn1MlQQvt4BYcP/view?usp=sharing","desc":""},{"id":"izcnxcv6","title":"Introduction to Greenhouse Gas Accounting for IT","category":"Certificate","issuer":"Cisco","date":"2026-08-30","driveLink":"https://drive.google.com/file/d/1gSP8G4BL2CSZ125wRZD9m4KffPiPBxGB/view?usp=sharing","desc":""},{"id":"ibyegj1y","title":"Exploring Internet Of Things With Cisco Packet Tracer","category":"Certificate","issuer":"Cisco","date":"2026-08-30","driveLink":"https://drive.google.com/file/d/1OwITsaCb6Pftvh3uZ1RQBXO-l6rvYucp/view?usp=sharing","desc":""},{"id":"iyxe4d3q","title":"Computer Hardware Basic","category":"Certificate","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1vtTnvF-plkxN8F6-t-sQ8myTN8Jyd4I7/view?usp=sharing","desc":""},{"id":"ibstfgw5","title":"Create Digital Content, Communicate and Collaborate Online","category":"Certificate","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1CaTj_8e44pf1Y6IRnHrSmITvbg1ukyqg/view?usp=sharing","desc":""},{"id":"ic7f11tb","title":"Exploring Networking with Cisco Packet Tracers","category":"Certificate","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/1y0CjlhT36MkMPi2THWBkiKJQ1q5V1C9L/view?usp=sharing","desc":""},{"id":"iip7gg27","title":"Creating Compelling Reports","category":"Certificate","issuer":"Cisco","date":"2026-08-28","driveLink":"https://drive.google.com/file/d/17eWEs_Ba3l5HqXaEIEo7RVuanNQ4rJKa/view?usp=sharing","desc":""},{"id":"iegfw300","title":"Introduction To IOT And Digital Transformation","category":"Certificate","issuer":"Cisco","date":"2026-08-27","driveLink":"https://drive.google.com/file/d/1-QBaKJSEB_xzjDfIuV7UqPfsZDqhZQ3P/view?usp=sharing","desc":""},{"id":"ivs6toxd","title":"Introduction To Modern Ai","category":"Certificate","issuer":"Cisco","date":"2026-08-27","driveLink":"https://drive.google.com/file/d/1V66aqIOSVIvoSFtavAt3877KPWYeyn5B/view?usp=sharing","desc":""},{"id":"i7oa762u","title":"Information Technology Fundamentals","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/112A2ySfZYj8vxRWzklLAoQn5BdmAsjjo/view?usp=sharing","desc":""},{"id":"i5w52inl","title":"TroubleShooting For Hardware, Networks, And Software","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1CjBbhG_6KnSOKlns0ds5dx3R5nqV3Ery/view?usp=sharing","desc":""},{"id":"ijdynum7","title":"Security Basic","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1UFfkVS57q7SoN_FMRpVMGhxKnGfntN-y/view?usp=sharing","desc":""},{"id":"ii58uw77","title":"Computing From Past To Present","category":"Certificate","issuer":"IBM SkillBuild","date":"2005-08-31","driveLink":"https://drive.google.com/file/d/1NQxjb7lj3_z7fXOtoAs0kBocBcDV9haZ/view?usp=sharing","desc":""},{"id":"i4gb7yce","title":"Your Future IT Support: The Job Landscape","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1xK6g0wMCJXhHCUnFamqMJZbeDHU1sBOV/view?usp=drive_link","desc":""},{"id":"iqz3ts6n","title":"Support Customer with a Network Issue","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1x9mn2ur9UpZU-d0SWh2w_UwfOQ41Wkk4/view?usp=sharing","desc":""},{"id":"iqd8a2cq","title":"Support Basic","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1Oen8-Sog7QwZOIYCyXcdDfxvFk-ylnpG/view?usp=sharing","desc":""},{"id":"igncy4xg","title":"Computer Networking Basic: How Computers Communicate","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/19CdxxtB9nfiQ-gPjtjIucB92orME1fE7/view?usp=sharing","desc":""},{"id":"ig7mnmpx","title":"Computer Basic","category":"Certificate","issuer":"IBM SkillBuild","date":"2026-08-31","driveLink":"https://drive.google.com/file/d/1xK6g0wMCJXhHCUnFamqMJZbeDHU1sBOV/view?usp=drive_link","desc":""}],"aboutMe":"## About Me\n\nI am Zaira D. Remalla, an Information Technology student who is interested in learning more about technology and developing my skills outside the classroom. As a student, I believe that learning does not only happen through regular school subjects. I also learn by attending online seminars, webinars, training sessions, and courses related to Information Technology.\n\nI created this project to document some of the online learning activities I have attended. Through these seminars and courses, I was able to explore different topics such as Information Technology fundamentals, artificial intelligence, cybersecurity, database management, networking, computer hardware, digital content, and Internet of Things.\n\nThese experiences helped me gain additional knowledge and encouraged me to continue improving my technical skills. The certificates, badges, and attendance proofs included in this website represent my participation and learning experiences as an IT student.","aboutSite":"About the Seminars and Tours Website\n\nSeminars and Tours - is a personal website created as my midterm project to showcase and organize the online seminars, webinars, courses, and learning activities I have attended.\n\nThe website serves as a digital collection of my certificates, digital badges, and proof of attendance. It organizes the records into three categories: **Certificates, Badges, and Proof of Attendance**, making it easier to browse and find a specific learning activity.\n\nThe website includes learning activities from different providers and organizations, including **UpSkillTech, Cisco, IBM SkillBuild, and BlackStride Cyber**. Some of the topics included are Information Technology Fundamentals, AI, cybersecurity, database management, computer hardware, networking, Internet of Things, and digital content.\n\nEach entry can also be verified through a link connected to its corresponding Google Drive file. This allows the certificates and other documents to be viewed as supporting evidence of my participation.\n\nThe main purpose of this website is to keep my learning records organized in one place while also presenting my continuous learning and development as an Information Technology student.","profilePhoto":null}</script>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">A CERTIFICATE SCRAPBOOK</p>
+    <h1 class="site-title" id="siteTitle">Seminars And Tours</h1>
+    <p class="site-sub" id="siteSub">A little collection of certificates, badges, and proof I showed up — each one links back to the real file on Google Drive so you can check for yourself.</p>
+    <div class="hero-divider">
+      <span class="hline"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--pink-deep)" stroke-width="1.8"><path d="M12 21s-7-6.5-7-11.5A7 7 0 0 1 19 9.5C19 14.5 12 21 12 21Z"></path><circle cx="12" cy="9.5" r="2.2"></circle></svg>
+      <span class="hline"></span>
+    </div>
+    <div id="ownerRow" style="display: block;">
+      <button class="edit-meta-btn" id="editMetaBtn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+        Edit title &amp; intro
+      </button>
+      <button class="edit-meta-btn" id="downloadBtn" style="display: inline-flex; margin-left: 8px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+        Download updated page
+      </button>
+    </div>
+  </header>
+
+  <div id="pageGallery" class="page-section show" style="display: block;">
+  <div class="chips" id="chips">
+    <button class="chip" data-cat="all">All</button>
+    <button class="chip active" data-cat="Certificate">Certificates</button>
+    <button class="chip" data-cat="Badge">Badges</button>
+    <button class="chip" data-cat="Attendance">Proof of attendance</button>
+  </div>
+
+  <div id="gridArea"><div class="grid"><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=14dAxST2jqouctC04080limJRTulV-0Nv&amp;sz=w800" alt="Graphics Design 101: Photoshop Essential Skill" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Graphics Design 101: Photoshop Essential Skill</h3>
+      <div class="meta">UpSkillTech · Sep 12, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/14dAxST2jqouctC04080limJRTulV-0Nv/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-itg6p45v" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-itg6p45v" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1OrVpr-4ZEssbrwoz1zxpT1A_1pJ2a9tH&amp;sz=w800" alt="IT Fundamentals: Intro to Information System" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>IT Fundamentals: Intro to Information System</h3>
+      <div class="meta">UpSkillTech · Sep 11, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1OrVpr-4ZEssbrwoz1zxpT1A_1pJ2a9tH/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-iolont59" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-iolont59" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=10wefUmyeCbERpS3xxFqW-_ujaizPx9tQ&amp;sz=w800" alt="AI Fundamentals: AI Automation Isn't Scary" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>AI Fundamentals: AI Automation Isn't Scary</h3>
+      <div class="meta">UpSkillTech · Sep 12, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/10wefUmyeCbERpS3xxFqW-_ujaizPx9tQ/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-i0ky04ot" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-i0ky04ot" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1NnqDnIhYyJQQrCr87xtgdlAVpQ-6M2RZ&amp;sz=w800" alt="Learning Advocate 2026 Series: Emerging IT Innovation" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Learning Advocate 2026 Series: Emerging IT Innovation</h3>
+      <div class="meta">UpSkillTech · Aug 22, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1NnqDnIhYyJQQrCr87xtgdlAVpQ-6M2RZ/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-i0nsmatg" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-i0nsmatg" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1O26umRVofWTEND_P4eAPb3WIeFxwkQZ-&amp;sz=w800" alt="Securing AI 101" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Securing AI 101</h3>
+      <div class="meta">BlackStride Cyber · Aug 28, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1O26umRVofWTEND_P4eAPb3WIeFxwkQZ-/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ikrnae1t" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ikrnae1t" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1j0gnE3TPE_6QWc8s14uc89vi5HzCIkyT&amp;sz=w800" alt="Database 101: Data Storage, SQL And Query Optimization" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Database 101: Data Storage, SQL And Query Optimization</h3>
+      <div class="meta">UpSkillTech · Aug 21, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1j0gnE3TPE_6QWc8s14uc89vi5HzCIkyT/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-i04ok53b" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-i04ok53b" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1weZYS2SHBt7VpWEYANC3bP3_K2Zd2xdm&amp;sz=w800" alt="Graphics Design 101: Photoshop Essential Skill" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"></rect><path d="M3 9h18M8 3v3M16 3v3"></path><path d="m8.5 14 2 2 4-4"></path></svg>Attendance</span>
+      </div>
+      <h3>Graphics Design 101: Photoshop Essential Skill</h3>
+      <div class="meta">UpSkillTech · Aug 12, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1weZYS2SHBt7VpWEYANC3bP3_K2Zd2xdm/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-i849pzv0" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-i849pzv0" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1PKvI_aW9SPnPDZMw-obG_0Z4MA_OuLBY&amp;sz=w800" alt="Introduction to Modern AI" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"></circle><path d="M9 14.5 7 21l5-3 5 3-2-6.5"></path></svg>Badge</span>
+      </div>
+      <h3>Introduction to Modern AI</h3>
+      <div class="meta">Cisco · Aug 27, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1PKvI_aW9SPnPDZMw-obG_0Z4MA_OuLBY/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-imwpvuzt" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-imwpvuzt" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1EwKHQvL1e1WHs8yQV5dRThWVRIR1AEQt&amp;sz=w800" alt="Introduction To Internet Of Things" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"></circle><path d="M9 14.5 7 21l5-3 5 3-2-6.5"></path></svg>Badge</span>
+      </div>
+      <h3>Introduction To Internet Of Things</h3>
+      <div class="meta">Aug 27, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1EwKHQvL1e1WHs8yQV5dRThWVRIR1AEQt/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-io2gfivh" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-io2gfivh" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1HTltAyzylsqneAglcg-o25wFWNZOBBPb&amp;sz=w800" alt="Introduction to Greenhouse Accounting For IT" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"></circle><path d="M9 14.5 7 21l5-3 5 3-2-6.5"></path></svg>Badge</span>
+      </div>
+      <h3>Introduction to Greenhouse Accounting For IT</h3>
+      <div class="meta">Cisco · Aug 30, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1HTltAyzylsqneAglcg-o25wFWNZOBBPb/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ip7hzkr8" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ip7hzkr8" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1naFgfhRdXqAc-K4PNsAhRV1HLnp4iUW-&amp;sz=w800" alt="Creating Compelling Reports" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"></circle><path d="M9 14.5 7 21l5-3 5 3-2-6.5"></path></svg>Badge</span>
+      </div>
+      <h3>Creating Compelling Reports</h3>
+      <div class="meta">Cisco · Aug 28, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1naFgfhRdXqAc-K4PNsAhRV1HLnp4iUW-/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-i3dwtttb" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-i3dwtttb" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1SznLGmYhhG6OpgkLHEopp3jxuRge7Jop&amp;sz=w800" alt="Create Digital Content, Communicate and Collaborate Online" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"></circle><path d="M9 14.5 7 21l5-3 5 3-2-6.5"></path></svg>Badge</span>
+      </div>
+      <h3>Create Digital Content, Communicate and Collaborate Online</h3>
+      <div class="meta">Cisco · Aug 28, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1SznLGmYhhG6OpgkLHEopp3jxuRge7Jop/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ivqkh9z0" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ivqkh9z0" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1feX1z1vKnGZv731hT6Jn1MlQQvt4BYcP&amp;sz=w800" alt="Computer Hardware Basic" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"></circle><path d="M9 14.5 7 21l5-3 5 3-2-6.5"></path></svg>Badge</span>
+      </div>
+      <h3>Computer Hardware Basic</h3>
+      <div class="meta">Cisco · Aug 28, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1feX1z1vKnGZv731hT6Jn1MlQQvt4BYcP/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-iuhebsgg" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-iuhebsgg" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1gSP8G4BL2CSZ125wRZD9m4KffPiPBxGB&amp;sz=w800" alt="Introduction to Greenhouse Gas Accounting for IT" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Introduction to Greenhouse Gas Accounting for IT</h3>
+      <div class="meta">Cisco · Aug 30, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1gSP8G4BL2CSZ125wRZD9m4KffPiPBxGB/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-izcnxcv6" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-izcnxcv6" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1OwITsaCb6Pftvh3uZ1RQBXO-l6rvYucp&amp;sz=w800" alt="Exploring Internet Of Things With Cisco Packet Tracer" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Exploring Internet Of Things With Cisco Packet Tracer</h3>
+      <div class="meta">Cisco · Aug 30, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1OwITsaCb6Pftvh3uZ1RQBXO-l6rvYucp/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ibyegj1y" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ibyegj1y" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1vtTnvF-plkxN8F6-t-sQ8myTN8Jyd4I7&amp;sz=w800" alt="Computer Hardware Basic" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Computer Hardware Basic</h3>
+      <div class="meta">Cisco · Aug 28, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1vtTnvF-plkxN8F6-t-sQ8myTN8Jyd4I7/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-iyxe4d3q" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-iyxe4d3q" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1CaTj_8e44pf1Y6IRnHrSmITvbg1ukyqg&amp;sz=w800" alt="Create Digital Content, Communicate and Collaborate Online" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Create Digital Content, Communicate and Collaborate Online</h3>
+      <div class="meta">Cisco · Aug 28, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1CaTj_8e44pf1Y6IRnHrSmITvbg1ukyqg/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ibstfgw5" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ibstfgw5" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1y0CjlhT36MkMPi2THWBkiKJQ1q5V1C9L&amp;sz=w800" alt="Exploring Networking with Cisco Packet Tracers" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Exploring Networking with Cisco Packet Tracers</h3>
+      <div class="meta">Cisco · Aug 28, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1y0CjlhT36MkMPi2THWBkiKJQ1q5V1C9L/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ic7f11tb" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ic7f11tb" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=17eWEs_Ba3l5HqXaEIEo7RVuanNQ4rJKa&amp;sz=w800" alt="Creating Compelling Reports" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Creating Compelling Reports</h3>
+      <div class="meta">Cisco · Aug 28, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/17eWEs_Ba3l5HqXaEIEo7RVuanNQ4rJKa/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-iip7gg27" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-iip7gg27" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1-QBaKJSEB_xzjDfIuV7UqPfsZDqhZQ3P&amp;sz=w800" alt="Introduction To IOT And Digital Transformation" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Introduction To IOT And Digital Transformation</h3>
+      <div class="meta">Cisco · Aug 27, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1-QBaKJSEB_xzjDfIuV7UqPfsZDqhZQ3P/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-iegfw300" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-iegfw300" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1V66aqIOSVIvoSFtavAt3877KPWYeyn5B&amp;sz=w800" alt="Introduction To Modern Ai" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Introduction To Modern Ai</h3>
+      <div class="meta">Cisco · Aug 27, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1V66aqIOSVIvoSFtavAt3877KPWYeyn5B/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ivs6toxd" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ivs6toxd" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=112A2ySfZYj8vxRWzklLAoQn5BdmAsjjo&amp;sz=w800" alt="Information Technology Fundamentals" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Information Technology Fundamentals</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/112A2ySfZYj8vxRWzklLAoQn5BdmAsjjo/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-i7oa762u" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-i7oa762u" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1CjBbhG_6KnSOKlns0ds5dx3R5nqV3Ery&amp;sz=w800" alt="TroubleShooting For Hardware, Networks, And Software" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>TroubleShooting For Hardware, Networks, And Software</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1CjBbhG_6KnSOKlns0ds5dx3R5nqV3Ery/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-i5w52inl" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-i5w52inl" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1UFfkVS57q7SoN_FMRpVMGhxKnGfntN-y&amp;sz=w800" alt="Security Basic" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Security Basic</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1UFfkVS57q7SoN_FMRpVMGhxKnGfntN-y/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ijdynum7" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ijdynum7" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1NQxjb7lj3_z7fXOtoAs0kBocBcDV9haZ&amp;sz=w800" alt="Computing From Past To Present" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Computing From Past To Present</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2005</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1NQxjb7lj3_z7fXOtoAs0kBocBcDV9haZ/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ii58uw77" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ii58uw77" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1xK6g0wMCJXhHCUnFamqMJZbeDHU1sBOV&amp;sz=w800" alt="Your Future IT Support: The Job Landscape" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Your Future IT Support: The Job Landscape</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1xK6g0wMCJXhHCUnFamqMJZbeDHU1sBOV/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-i4gb7yce" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-i4gb7yce" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1x9mn2ur9UpZU-d0SWh2w_UwfOQ41Wkk4&amp;sz=w800" alt="Support Customer with a Network Issue" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Support Customer with a Network Issue</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1x9mn2ur9UpZU-d0SWh2w_UwfOQ41Wkk4/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-iqz3ts6n" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-iqz3ts6n" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1Oen8-Sog7QwZOIYCyXcdDfxvFk-ylnpG&amp;sz=w800" alt="Support Basic" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Support Basic</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1Oen8-Sog7QwZOIYCyXcdDfxvFk-ylnpG/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-iqd8a2cq" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-iqd8a2cq" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=19CdxxtB9nfiQ-gPjtjIucB92orME1fE7&amp;sz=w800" alt="Computer Networking Basic: How Computers Communicate" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Computer Networking Basic: How Computers Communicate</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/19CdxxtB9nfiQ-gPjtjIucB92orME1fE7/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-igncy4xg" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-igncy4xg" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div><div class="card">
+      <div class="thumb-wrap">
+        <img src="https://drive.google.com/thumbnail?id=1xK6g0wMCJXhHCUnFamqMJZbeDHU1sBOV&amp;sz=w800" alt="Computer Basic" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'">
+        <span class="cat-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"></path><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"></path><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"></circle></svg>Certificate</span>
+      </div>
+      <h3>Computer Basic</h3>
+      <div class="meta">IBM SkillBuild · Aug 31, 2026</div>
+      
+      <div class="card-actions">
+        <a class="verify-btn" href="https://drive.google.com/file/d/1xK6g0wMCJXhHCUnFamqMJZbeDHU1sBOV/view" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"></path><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"></path><path d="m9 15 3-4 3 4"></path></svg> Verify on Drive</a>
+        <button class="icon-btn" id="edit-ig7mnmpx" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg></button>
+        <button class="icon-btn" id="del-ig7mnmpx" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg></button>
+      </div>
+    </div></div></div>
+  </div>
+
+  <div id="pageAboutMe" class="page-section" style="display: none;">
+    <h2 class="page-title">About me</h2>
+    <div class="avatar-wrap" id="avatarWrap">
+      <div class="avatar-circle" id="avatarCircle">
+        <img id="avatarImg" src="" alt="Profile photo" style="display:none;">
+        <svg class="avatar-placeholder" id="avatarPlaceholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path></svg>
+      </div>
+      <div class="avatar-actions" id="avatarActions" style="display:none;">
+        <button type="button" class="edit-meta-btn" id="avatarLinkBtn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+          Change photo
+        </button>
+        <button type="button" class="edit-meta-btn danger-ghost" id="avatarRemoveBtn" style="display:none;">Remove</button>
+      </div>
+      <form id="avatarLinkForm" style="display:none; max-width: 420px; width:100%;">
+        <div class="howto" style="text-align:left;">
+          Paste a link to your photo — from Google Drive (Share → Anyone with the link), Imgur, or anywhere else it's hosted. This keeps working even after a refresh or a redeploy, since it's just a link, not an uploaded file.
+        </div>
+        <div class="field">
+          <label for="f-avatar-link">Photo link</label>
+          <input id="f-avatar-link" placeholder="https://drive.google.com/file/d/... or any image URL">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn ghost" id="avatarLinkCancel">Cancel</button>
+          <button type="submit" class="btn primary">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="about-content" id="aboutMeContent" style="display: block;">## About Me
+
+I am Zaira D. Remalla, an Information Technology student who is interested in learning more about technology and developing my skills outside the classroom. As a student, I believe that learning does not only happen through regular school subjects. I also learn by attending online seminars, webinars, training sessions, and courses related to Information Technology.
+
+I created this project to document some of the online learning activities I have attended. Through these seminars and courses, I was able to explore different topics such as Information Technology fundamentals, artificial intelligence, cybersecurity, database management, networking, computer hardware, digital content, and Internet of Things.
+
+These experiences helped me gain additional knowledge and encouraged me to continue improving my technical skills. The certificates, badges, and attendance proofs included in this website represent my participation and learning experiences as an IT student.</div>
+    <form id="aboutMeForm" style="display: none; max-width: 640px; margin: 0px auto;">
+      <div class="field">
+        <textarea id="am-text" style="min-height:220px;"></textarea>
+      </div>
+      <div class="modal-actions" style="max-width:480px;">
+        <button type="button" class="btn ghost" id="aboutMeCancel">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+    <button type="button" class="edit-meta-btn" id="aboutMeEditBtn" style="display: inline-flex;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+      Edit
+    </button>
+  </div>
+
+  <div id="pageAboutSite" class="page-section" style="display: none;">
+    <h2 class="page-title">About this website</h2>
+    <div class="about-content" id="aboutSiteContent" style="display: block;">About the Seminars and Tours Website
+
+Seminars and Tours - is a personal website created as my midterm project to showcase and organize the online seminars, webinars, courses, and learning activities I have attended.
+
+The website serves as a digital collection of my certificates, digital badges, and proof of attendance. It organizes the records into three categories: **Certificates, Badges, and Proof of Attendance**, making it easier to browse and find a specific learning activity.
+
+The website includes learning activities from different providers and organizations, including **UpSkillTech, Cisco, IBM SkillBuild, and BlackStride Cyber**. Some of the topics included are Information Technology Fundamentals, AI, cybersecurity, database management, computer hardware, networking, Internet of Things, and digital content.
+
+Each entry can also be verified through a link connected to its corresponding Google Drive file. This allows the certificates and other documents to be viewed as supporting evidence of my participation.
+
+The main purpose of this website is to keep my learning records organized in one place while also presenting my continuous learning and development as an Information Technology student.</div>
+    <form id="aboutSiteForm" style="display: none; max-width: 640px; margin: 0px auto;">
+      <div class="field">
+        <textarea id="as-text" style="min-height:220px;"></textarea>
+      </div>
+      <div class="modal-actions" style="max-width:480px;">
+        <button type="button" class="btn ghost" id="aboutSiteCancel">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+    <button type="button" class="edit-meta-btn" id="aboutSiteEditBtn" style="display: inline-flex;">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+      Edit
+    </button>
+  </div>
+</div>
+
+
+<button class="fab" id="fabAdd" style="display: none;" aria-label="Add item">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+</button>
+
+<!-- Add / edit item modal -->
+<div class="overlay" id="itemOverlay">
+  <div class="modal">
+    <h2 id="itemModalTitle">Add to the garden</h2>
+    <p class="hint">Fill this in once you've uploaded the file to Google Drive — visitors will tap "Verify" to see the real thing.</p>
+    <div class="howto">
+      Getting a link that works:
+      <ol>
+        <li>Upload the certificate/badge photo or PDF to Google Drive.</li>
+        <li>Right-click it → <b>Share</b> → set access to "Anyone with the link" (Viewer).</li>
+        <li>Copy the link and paste it below.</li>
+      </ol>
+    </div>
+    <form id="itemForm">
+      <div class="field">
+        <label for="f-title">Title</label>
+        <input id="f-title" required="" placeholder="e.g. Google Data Analytics Certificate">
+      </div>
+      <div class="field">
+        <label for="f-cat">Category</label>
+        <select id="f-cat">
+          <option value="Certificate">Certificate</option>
+          <option value="Badge">Badge</option>
+          <option value="Attendance">Proof of attendance</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-issuer">Issuer / event</label>
+        <input id="f-issuer" placeholder="e.g. Coursera, or Annual Tech Summit">
+      </div>
+      <div class="field">
+        <label for="f-date">Date</label>
+        <input id="f-date" type="date">
+      </div>
+      <div class="field">
+        <label for="f-link">Google Drive link</label>
+        <input id="f-link" required="" placeholder="https://drive.google.com/file/d/...">
+        <div class="fieldnote" id="linkNote"></div>
+      </div>
+      <div class="field">
+        <label for="f-desc">Note (optional)</label>
+        <textarea id="f-desc" placeholder="Anything you'd like visitors to know"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="itemCancel">Cancel</button>
+        <button type="submit" class="btn primary" id="itemSave">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit page title/intro modal -->
+<div class="overlay" id="metaOverlay">
+  <div class="modal">
+    <h2>Edit title &amp; intro</h2>
+    <p class="hint">This is what every visitor sees at the top of the page.</p>
+    <form id="metaForm">
+      <div class="field">
+        <label for="m-title">Page title</label>
+        <input id="m-title" required="">
+      </div>
+      <div class="field">
+        <label for="m-sub">Intro text</label>
+        <textarea id="m-sub" style="min-height:90px;"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="metaCancel">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast">Saved in this browser. Download the updated page to publish it.</div>
+
+<footer>Made with care 🌷</footer>
+
+<script>
+(function(){
+  const ICONS = {
+    Certificate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 12 L4 7c-1 0-1.5 1-1 1.7L7 12 3 15.7c-.5.7 0 1.7 1 1.7l8-5Z"/><path d="M12 12 L20 7c1 0 1.5 1 1 1.7L17 12l4 3.7c.5.7 0 1.7-1 1.7l-8-5Z"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg>',
+    Badge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="9" r="6"/><path d="M9 14.5 7 21l5-3 5 3-2-6.5"/></svg>',
+    Attendance: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 3v3M16 3v3"/><path d="m8.5 14 2 2 4-4"/></svg>'
+  };
+  const DRIVE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2Z"/><path d="m9 15 3-4 3 4"/></svg>';
+
+  let state = JSON.parse(document.getElementById('site-data').textContent);
+  let activeCat = 'all';
+  let editingId = null;
+  let isOwner = false;
+  let artifactApi = null;
+  let standaloneMode = false;
+  const LOCAL_KEY = 'seminars-and-tours-state';
+
+  const $ = (sel) => document.querySelector(sel);
+  const gridArea = $('#gridArea');
+
+  function uid(){ return 'i' + Math.random().toString(36).slice(2, 9); }
+
+  function driveIdFromLink(url){
+    if(!url) return null;
+    const patterns = [
+      /\/d\/([a-zA-Z0-9_-]{15,})/,
+      /[?&]id=([a-zA-Z0-9_-]{15,})/,
+      /\/folders\/([a-zA-Z0-9_-]{15,})/
+    ];
+    for(const p of patterns){
+      const m = url.match(p);
+      if(m) return m[1];
+    }
+    return null;
+  }
+
+  function escapeHtml(s){
+    return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function fmtDate(d){
+    if(!d) return '';
+    try{
+      const dt = new Date(d + 'T00:00:00');
+      return dt.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+    }catch(e){ return d; }
+  }
+
+  function renderMeta(){
+    $('#siteTitle').textContent = state.title;
+    $('#siteSub').textContent = state.subtitle;
+    document.title = state.title;
+  }
+
+  function renderGrid(){
+    const items = state.items.filter(it => activeCat === 'all' || it.category === activeCat);
+    if(items.length === 0){
+      gridArea.innerHTML = renderEmpty();
+      const addBtn = document.getElementById('emptyAddBtn');
+      if(addBtn) addBtn.addEventListener('click', () => openItemModal());
+      return;
+    }
+    gridArea.innerHTML = '<div class="grid">' + items.map(cardHtml).join('') + '</div>';
+    items.forEach(it => {
+      const editBtn = document.getElementById('edit-' + it.id);
+      const delBtn = document.getElementById('del-' + it.id);
+      if(editBtn) editBtn.addEventListener('click', () => openItemModal(it.id));
+      if(delBtn) delBtn.addEventListener('click', () => deleteItem(it.id));
+    });
+  }
+
+  function renderEmpty(){
+    if(isOwner){
+      return `<div class="empty">
+        <svg viewBox="0 0 64 64" fill="none"><g stroke="var(--pink-deep)" stroke-width="1.8" stroke-linejoin="round"><path d="M32 30c-6-7-6-18 0-21 6 3 6 14 0 21Z"/><path d="M32 30c8-3 17 1 18 8-5 5-14 1-18-8Z"/><path d="M32 30c4 8 1 18-6 20-6-4-2-14 6-20Z"/><path d="M32 30c-8 3-17-1-18-8 5-5 14-1 18 8Z"/><path d="M32 30c-4-8-1-18 6-20 6 4 2 14-6 20Z"/></g><circle cx="32" cy="30" r="4" fill="var(--gold)"/></svg>
+        <h3>Your garden is empty</h3>
+        <p>Add your first certificate, badge, or proof of attendance — link it to Google Drive so it's easy to verify.</p>
+        <button class="fab-add-first" id="emptyAddBtn">+ Add your first item</button>
+      </div>`;
+    }
+    return `<div class="empty">
+      <svg viewBox="0 0 64 64" fill="none"><g stroke="var(--pink-deep)" stroke-width="1.8" stroke-linejoin="round"><path d="M32 30c-6-7-6-18 0-21 6 3 6 14 0 21Z"/><path d="M32 30c8-3 17 1 18 8-5 5-14 1-18-8Z"/><path d="M32 30c4 8 1 18-6 20-6-4-2-14 6-20Z"/><path d="M32 30c-8 3-17-1-18-8 5-5 14-1 18 8Z"/><path d="M32 30c-4-8-1-18 6-20 6 4 2 14-6 20Z"/></g><circle cx="32" cy="30" r="4" fill="var(--gold)"/></svg>
+      <h3>Nothing here yet</h3>
+      <p>Check back soon — this garden is still growing.</p>
+    </div>`;
+  }
+
+  function cardHtml(it){
+    const fileId = driveIdFromLink(it.driveLink);
+    const thumb = fileId
+      ? `<img src="https://drive.google.com/thumbnail?id=${fileId}&sz=w800" alt="${escapeHtml(it.title)}" loading="lazy" onerror="this.closest('.thumb-wrap').innerHTML='<div class=&quot;thumb-fallback&quot;>Preview unavailable —<br>use Verify to view</div>'" />`
+      : `<div class="thumb-fallback">No preview link</div>`;
+    const viewUrl = fileId ? `https://drive.google.com/file/d/${fileId}/view` : (it.driveLink || '#');
+    const metaLine = [it.issuer, fmtDate(it.date)].filter(Boolean).join(' · ');
+    return `<div class="card">
+      <div class="thumb-wrap">
+        ${thumb}
+        <span class="cat-tag">${ICONS[it.category] || ''}${it.category === 'Attendance' ? 'Attendance' : it.category}</span>
+      </div>
+      <h3>${escapeHtml(it.title)}</h3>
+      ${metaLine ? `<div class="meta">${escapeHtml(metaLine)}</div>` : ''}
+      ${it.desc ? `<div class="desc">${escapeHtml(it.desc)}</div>` : ''}
+      <div class="card-actions">
+        <a class="verify-btn" href="${viewUrl}" target="_blank" rel="noopener">${DRIVE_ICON} Verify on Drive</a>
+        ${isOwner ? `<button class="icon-btn" id="edit-${it.id}" title="Edit" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+        <button class="icon-btn" id="del-${it.id}" title="Delete" aria-label="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg></button>` : ''}
+      </div>
+    </div>`;
+  }
+
+  let currentPage = 'gallery';
+  const PAGE_SECTIONS = { gallery: 'pageGallery', aboutme: 'pageAboutMe', aboutsite: 'pageAboutSite' };
+
+  function showPage(page){
+    currentPage = page;
+    Object.entries(PAGE_SECTIONS).forEach(([key, id]) => {
+      document.getElementById(id).style.display = (key === page) ? 'block' : 'none';
+    });
+    document.querySelectorAll('#pageNav .nav-link').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.page === page);
+    });
+    if(page === 'aboutme') refreshAboutView('aboutMe');
+    if(page === 'aboutsite') refreshAboutView('aboutSite');
+    applyOwnerUI();
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
+  document.getElementById('pageNav').addEventListener('click', (e) => {
+    const btn = e.target.closest('.nav-link');
+    if(!btn) return;
+    showPage(btn.dataset.page);
+  });
+
+  function applyOwnerUI(){
+    document.getElementById('fabAdd').style.display = (isOwner && currentPage === 'gallery') ? 'flex' : 'none';
+    document.getElementById('ownerRow').style.display = isOwner ? 'block' : 'none';
+    const amEdit = document.getElementById('aboutMeEditBtn');
+    const asEdit = document.getElementById('aboutSiteEditBtn');
+    if(amEdit) amEdit.style.display = isOwner ? 'inline-flex' : 'none';
+    if(asEdit) asEdit.style.display = isOwner ? 'inline-flex' : 'none';
+    const avatarActions = document.getElementById('avatarActions');
+    if(avatarActions) avatarActions.style.display = isOwner ? 'flex' : 'none';
+    renderAvatar();
+  }
+
+  // ---- chips ----
+  document.getElementById('chips').addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if(!chip) return;
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeCat = chip.dataset.cat;
+    renderGrid();
+  });
+
+  // ---- item modal ----
+  const itemOverlay = document.getElementById('itemOverlay');
+  function openItemModal(id){
+    editingId = id || null;
+    const it = id ? state.items.find(x => x.id === id) : null;
+    document.getElementById('itemModalTitle').textContent = it ? 'Edit item' : 'Add to the garden';
+    document.getElementById('itemSave').textContent = it ? 'Save changes' : 'Save';
+    $('#f-title').value = it ? it.title : '';
+    $('#f-cat').value = it ? it.category : 'Certificate';
+    $('#f-issuer').value = it ? (it.issuer || '') : '';
+    $('#f-date').value = it ? (it.date || '') : '';
+    $('#f-link').value = it ? (it.driveLink || '') : '';
+    $('#f-desc').value = it ? (it.desc || '') : '';
+    $('#linkNote').textContent = '';
+    itemOverlay.classList.add('show');
+  }
+  function closeItemModal(){ itemOverlay.classList.remove('show'); editingId = null; }
+  document.getElementById('itemCancel').addEventListener('click', closeItemModal);
+  itemOverlay.addEventListener('click', (e) => { if(e.target === itemOverlay) closeItemModal(); });
+
+  document.getElementById('f-link').addEventListener('input', (e) => {
+    const id = driveIdFromLink(e.target.value);
+    $('#linkNote').textContent = e.target.value
+      ? (id ? '' : "Couldn't find a file ID in this link — make sure it's a Google Drive share link.")
+      : '';
+  });
+
+  document.getElementById('itemForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = $('#f-title').value.trim();
+    const link = $('#f-link').value.trim();
+    if(!title || !link) return;
+    const payload = {
+      title, category: $('#f-cat').value, issuer: $('#f-issuer').value.trim(),
+      date: $('#f-date').value, driveLink: link, desc: $('#f-desc').value.trim()
+    };
+    if(editingId){
+      const idx = state.items.findIndex(x => x.id === editingId);
+      state.items[idx] = { ...state.items[idx], ...payload };
+    } else {
+      state.items.unshift({ id: uid(), ...payload });
+    }
+    closeItemModal();
+    renderGrid();
+    persist('Saved! Visitors will see this update.');
+  });
+
+  function deleteItem(id){
+    if(!confirm('Remove this item from the garden?')) return;
+    state.items = state.items.filter(x => x.id !== id);
+    renderGrid();
+    persist('Removed.');
+  }
+
+  // ---- meta modal ----
+  const metaOverlay = document.getElementById('metaOverlay');
+  document.getElementById('editMetaBtn').addEventListener('click', () => {
+    $('#m-title').value = state.title;
+    $('#m-sub').value = state.subtitle;
+    metaOverlay.classList.add('show');
+  });
+  document.getElementById('metaCancel').addEventListener('click', () => metaOverlay.classList.remove('show'));
+  metaOverlay.addEventListener('click', (e) => { if(e.target === metaOverlay) metaOverlay.classList.remove('show'); });
+  document.getElementById('metaForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    state.title = $('#m-title').value.trim() || state.title;
+    state.subtitle = $('#m-sub').value.trim();
+    metaOverlay.classList.remove('show');
+    renderMeta();
+    persist('Saved! Visitors will see this update.');
+  });
+
+  document.getElementById('fabAdd').addEventListener('click', () => openItemModal());
+
+  // ---- about pages ----
+  function refreshAboutView(key){
+    const content = document.getElementById(key === 'aboutMe' ? 'aboutMeContent' : 'aboutSiteContent');
+    const form = document.getElementById(key === 'aboutMe' ? 'aboutMeForm' : 'aboutSiteForm');
+    content.textContent = state[key] || '';
+    content.style.display = 'block';
+    form.style.display = 'none';
+  }
+
+  function setupAboutEditor(key, contentId, formId, textareaId, editBtnId, cancelId){
+    const content = document.getElementById(contentId);
+    const form = document.getElementById(formId);
+    const textarea = document.getElementById(textareaId);
+    const editBtn = document.getElementById(editBtnId);
+
+    function showView(){
+      content.textContent = state[key] || '';
+      content.style.display = 'block';
+      form.style.display = 'none';
+      editBtn.style.display = isOwner ? 'inline-flex' : 'none';
+    }
+    function showEdit(){
+      textarea.value = state[key] || '';
+      content.style.display = 'none';
+      editBtn.style.display = 'none';
+      form.style.display = 'block';
+    }
+
+    editBtn.addEventListener('click', showEdit);
+    document.getElementById(cancelId).addEventListener('click', showView);
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      state[key] = textarea.value.trim();
+      showView();
+      persist('Saved! Visitors will see this update.');
+    });
+  }
+
+  setupAboutEditor('aboutMe', 'aboutMeContent', 'aboutMeForm', 'am-text', 'aboutMeEditBtn', 'aboutMeCancel');
+  setupAboutEditor('aboutSite', 'aboutSiteContent', 'aboutSiteForm', 'as-text', 'aboutSiteEditBtn', 'aboutSiteCancel');
+
+  // ---- profile photo ----
+  function avatarImageUrl(){
+    if(!state.profilePhoto || !state.profilePhoto.url) return null;
+    const raw = state.profilePhoto.url;
+    const fileId = driveIdFromLink(raw);
+    return fileId ? `https://drive.google.com/thumbnail?id=${fileId}&sz=w800` : raw;
+  }
+
+  function renderAvatar(){
+    const img = document.getElementById('avatarImg');
+    const placeholder = document.getElementById('avatarPlaceholder');
+    const removeBtn = document.getElementById('avatarRemoveBtn');
+    const src = avatarImageUrl();
+    if(src){
+      img.src = src;
+      img.style.display = 'block';
+      placeholder.style.display = 'none';
+      if(removeBtn) removeBtn.style.display = isOwner ? 'inline-flex' : 'none';
+    } else {
+      img.style.display = 'none';
+      placeholder.style.display = 'block';
+      if(removeBtn) removeBtn.style.display = 'none';
+    }
+  }
+
+  const avatarLinkBtn = document.getElementById('avatarLinkBtn');
+  const avatarLinkForm = document.getElementById('avatarLinkForm');
+  const avatarLinkCancel = document.getElementById('avatarLinkCancel');
+  const avatarRemoveBtn = document.getElementById('avatarRemoveBtn');
+  const avatarActions = document.getElementById('avatarActions');
+
+  function showAvatarLinkForm(){
+    document.getElementById('f-avatar-link').value = (state.profilePhoto && state.profilePhoto.url) || '';
+    avatarLinkForm.style.display = 'block';
+    if(avatarActions) avatarActions.style.display = 'none';
+  }
+  function hideAvatarLinkForm(){
+    avatarLinkForm.style.display = 'none';
+    if(avatarActions && isOwner) avatarActions.style.display = 'flex';
+  }
+  if(avatarLinkBtn) avatarLinkBtn.addEventListener('click', showAvatarLinkForm);
+  if(avatarLinkCancel) avatarLinkCancel.addEventListener('click', hideAvatarLinkForm);
+  if(avatarLinkForm) avatarLinkForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const link = document.getElementById('f-avatar-link').value.trim();
+    state.profilePhoto = link ? { url: link } : null;
+    hideAvatarLinkForm();
+    renderAvatar();
+    persist('Saved! Visitors will see your new photo.');
+  });
+  if(avatarRemoveBtn) avatarRemoveBtn.addEventListener('click', () => {
+    if(!confirm('Remove your profile photo?')) return;
+    state.profilePhoto = null;
+    renderAvatar();
+    persist('Removed.');
+  });
+
+  // ---- toast ----
+  let toastTimer = null;
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+  }
+
+  // ---- persistence ----
+  function buildFullHtml(){
+    document.getElementById('site-data').textContent = JSON.stringify(state);
+    return '<!doctype html>\n' + document.documentElement.outerHTML;
+  }
+
+  function downloadHtml(){
+    const html = buildFullHtml();
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Seminars_And_Tours.html';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function persist(successMsg){
+    if(artifactApi && isOwner){
+      const html = buildFullHtml();
+      artifactApi.publish(html).then(() => {
+        showToast(successMsg);
+      }).catch((err) => {
+        showToast('Could not save — try again in a moment.');
+      });
+    } else if(standaloneMode){
+      document.getElementById('site-data').textContent = JSON.stringify(state);
+      try{
+        localStorage.setItem(LOCAL_KEY, JSON.stringify(state));
+        showToast('Saved in this browser. Download the updated page to publish it.');
+      }catch(e){
+        showToast('Could not save locally in this browser.');
+      }
+    } else {
+      document.getElementById('site-data').textContent = JSON.stringify(state);
+      showToast('Preview only — publish this page to save changes for visitors.');
+    }
+  }
+
+  // ---- init ----
+  renderMeta();
+  renderGrid();
+  renderAvatar();
+
+  function withTimeout(promise, ms){
+    return Promise.race([
+      promise,
+      new Promise((resolve) => setTimeout(() => resolve(null), ms))
+    ]);
+  }
+
+  async function init(){
+    let user = null;
+    let hasClaudeRuntime = false;
+    try{
+      if(window.claude && typeof window.claude.use === 'function'){
+        user = await withTimeout(window.claude.use('user'), 2500);
+        hasClaudeRuntime = true;
+      }
+    }catch(e){ user = null; }
+
+    if(user){
+      // Running inside claude.ai with the runtime granted.
+      isOwner = !!(user.isOwner && user.isOwner());
+      try{
+        artifactApi = await withTimeout(window.claude.use('artifact'), 2500);
+      }catch(e){ artifactApi = null; }
+      standaloneMode = false;
+    } else if(hasClaudeRuntime){
+      // On claude.ai but this viewer isn't the owner — read-only.
+      isOwner = false;
+      standaloneMode = false;
+    } else {
+      // No claude.ai runtime at all — likely hosted standalone (GitHub Pages, Vercel, etc).
+      standaloneMode = true;
+      isOwner = true; // editing here only ever affects this browser's local copy
+      try{
+        const saved = localStorage.getItem(LOCAL_KEY);
+        if(saved){ state = JSON.parse(saved); }
+      }catch(e){ /* ignore malformed local data */ }
+      const dlBtn = document.getElementById('downloadBtn');
+      if(dlBtn) dlBtn.style.display = 'inline-flex';
+    }
+
+    applyOwnerUI();
+    renderMeta();
+    renderGrid();
+  }
+  init();
+
+  document.getElementById('downloadBtn').addEventListener('click', downloadHtml);
+})();
+</script>
+
+
+</body></html>
